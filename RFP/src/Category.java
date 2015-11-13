@@ -14,13 +14,13 @@ public class Category {
 	 */
 	private ArrayList<Data> clause = new ArrayList<>();
 	
-	/**
-	 * The empty class constructor.
-	 */
-	Category(){
-		this.name = "";
-		this.id = "";
-	}
+//	/**
+//	 * The empty class constructor.
+//	 */
+//	Category(){
+//		this.name = "";
+//		this.id = "";
+//	}
 
 	/**
 	 * Construct the object with inputs.	 

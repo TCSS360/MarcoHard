@@ -1,4 +1,4 @@
-/*
+/**
  * The Data class will store the clause and information about that clause
  */
 public class Data {
@@ -30,7 +30,7 @@ public class Data {
 	 * Construct the class with inputs.
 	 * @param a is the clause name.
 	 * @param b is the clause information.
-	 * @param i is the cluse id.
+	 * @param i is the clause id.
 	 */
 	Data(String a, String b, int i){
 		setClause(a);
@@ -39,42 +39,42 @@ public class Data {
 	}
 
 	/**
-	 * @return the clause
+	 * @return the clause's title.
 	 */
 	public String getClause() {
-		return clause;
+		return this.clause;
 	}
 
 	/**
-	 * @param clause the clause to set
+	 * @param clause is a new title of clause.
 	 */
 	public void setClause(String clause) {
 		this.clause = clause;
 	}
 
 	/**
-	 * @return the infor
+	 * @return the information of the clause.
 	 */
 	public String getInfor() {
-		return infor;
+		return this.infor;
 	}
 
 	/**
-	 * @param infor the infor to set
+	 * @param inf is the new information about the clause.
 	 */
-	public void setInfor(String infor) {
-		this.infor = infor;
+	public void setInfor(String inf) {
+		this.infor = inf;
 	}
 
 	/**
-	 * @return the id
+	 * @return the id of clause
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id is new clause id.
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -85,6 +85,6 @@ public class Data {
 	 */
 	@Override
 	public String toString () {
-		return this.clause + "/n" + this.infor;
+		return this.clause + "\n" + this.infor;
 	}
 }

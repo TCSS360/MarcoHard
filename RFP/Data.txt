@@ -1,0 +1,10 @@
+Price and Cost
+Clause:
+LIMITATION OF AVAILABLE FUNDING (Clause B-2.01) (September 2008)
+Due to limited funding resulting from Congressional Continuing Resolution and/or annual funding limitations, this purchase order/contract is being incrementally funded. Funds are not presently available for performance under this purchase order/contract beyond the amount of $ . Buyer's obligation under this purchase order/contract beyond this amount is contingent on availability of appropriated funds from which payment for purchase order/contract purposes can be made. No legal liability on the part of the Buyer for any payment may arise for performance beyond this amount until additional funds are made available for performance, and until the Seller receives written notice of availability of funds by formal modification to this purchase order/contract.
+End-Clause:
+Clause:
+COST REPORTS-COST REIMBURSEMENT PURCHASE ORDERS/CONTRACTS (Clause B-4.1) (April 1999)
+In addition to any cost information and substantiating data that the Buyer may require Seller to furnish in support of periodic invoices as provided in the "Allowable Cost and Payment" article of the Terms and Conditions, Seller shall submit the following and periodic and final cost reports. Periodic Cost Reports: Within a period of 90 days following the end of each of Seller's fiscal years, Seller shall submit a report to the Buyer identifying the actual allowable cost of performing the work hereunder during the fiscal year ended. Such report shall delineate the material costs, labor costs by discipline, the various categories of indirect costs and rates properly allocable during the fiscal period. Final Cost Report: A final cost report identifying the actual total allowable cost of performing the work hereunder, in the same detail as the periodic report above, shall be submitted to the Buyer within 90 days following the close of Seller's fiscal year in which this purchase order/contract is completed.
+End-Clause:
+End-Category:

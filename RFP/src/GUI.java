@@ -17,7 +17,7 @@ public class GUI {
 		JFrame GUIFrame = new JFrame();
 		
 		GUIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		GUIFrame.setTitle("Library Language Application Ver 1.0"); 
+		GUIFrame.setTitle("Language Library Application Ver 1.0"); 
 		GUIFrame.setSize(600,300);
 		
 		JMenuBar menuBar = new JMenuBar();

@@ -40,7 +40,7 @@ public class GUI {
 	 */
 	public GUI() {
 		initialize();
-		egg = new Egg("MACROHARD TEAM");
+		egg = new Egg("We Are MACROHARD TEAM");
 		egg.setMember("Navy Nguyen");
 		egg.setMember("Shelema Bekele");
 		egg.setMember("Mubarek Shafi");
@@ -79,7 +79,7 @@ public class GUI {
 		
 		team = new JLabel("");
 		team.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		team.setBounds(146, 45, 143, 23);
+		team.setBounds(146, 45, 170, 23);
 		frmEaterEggIteration.getContentPane().add(team);
 		
 		label = new JLabel("");

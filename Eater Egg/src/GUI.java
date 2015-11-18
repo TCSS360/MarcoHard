@@ -61,7 +61,7 @@ public class GUI {
 		frmEaterEggIteration.getContentPane().setLayout(null);
 		
 		JButton btnEaterEgg = new JButton("Eater Egg");		
-		btnEaterEgg.setIcon(new ImageIcon("C:\\Users\\Chuot\\Desktop\\MarcoHard\\Eater Egg\\egg.png"));
+		btnEaterEgg.setIcon(new ImageIcon("egg.png"));
 		btnEaterEgg.setBackground(Color.LIGHT_GRAY);
 		btnEaterEgg.setForeground(Color.RED);
 		btnEaterEgg.setFont(new Font("Tahoma", Font.BOLD, 13));

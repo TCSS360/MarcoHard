@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class GUI {
 
@@ -40,7 +42,7 @@ public class GUI {
 	 */
 	public GUI() {
 		initialize();
-		egg = new Egg("We Are MACROHARD TEAM");
+		egg = new Egg("We Are MACROHARD TEAM MEMBERS !!!");
 		egg.setMember("Navy Nguyen");
 		egg.setMember("Shelema Bekele");
 		egg.setMember("Mubarek Shafi");
@@ -59,10 +61,11 @@ public class GUI {
 		frmEaterEggIteration.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEaterEggIteration.getContentPane().setLayout(null);
 		
-		JButton btnEaterEgg = new JButton("Eater Egg");
+		JButton btnEaterEgg = new JButton("Eater Egg");		
+		btnEaterEgg.setIcon(new ImageIcon("C:\\Users\\Chuot\\Desktop\\MarcoHard\\Eater Egg\\egg.png"));
 		btnEaterEgg.setBackground(Color.LIGHT_GRAY);
 		btnEaterEgg.setForeground(Color.RED);
-		btnEaterEgg.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnEaterEgg.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnEaterEgg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				team.setText(egg.getTeam());
@@ -74,12 +77,12 @@ public class GUI {
 				label_5.setText(egg.getMember(5));
 			}
 		});
-		btnEaterEgg.setBounds(172, 11, 89, 23);
+		btnEaterEgg.setBounds(146, 11, 143, 33);
 		frmEaterEggIteration.getContentPane().add(btnEaterEgg);
 		
 		team = new JLabel("");
-		team.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		team.setBounds(146, 45, 170, 23);
+		team.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		team.setBounds(81, 45, 298, 23);
 		frmEaterEggIteration.getContentPane().add(team);
 		
 		label = new JLabel("");

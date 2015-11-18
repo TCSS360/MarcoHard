@@ -55,12 +55,12 @@ public class GUI {
 	 */
 	private void initialize() {
 		frmEaterEggIteration = new JFrame();
-		frmEaterEggIteration.setTitle("Eater Egg Iteration");
+		frmEaterEggIteration.setTitle("Easter Egg Iteration");
 		frmEaterEggIteration.setBounds(100, 100, 458, 338);
 		frmEaterEggIteration.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEaterEggIteration.getContentPane().setLayout(null);
 		
-		JButton btnEaterEgg = new JButton("Eater Egg");		
+		JButton btnEaterEgg = new JButton("Easter Egg");		
 		btnEaterEgg.setIcon(new ImageIcon("egg.png"));
 		btnEaterEgg.setBackground(Color.LIGHT_GRAY);
 		btnEaterEgg.setForeground(Color.RED);

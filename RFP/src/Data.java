@@ -1,90 +1,107 @@
 /**
- * The Data class will store the clause and information about that clause
+ * The Data class will store the title and information of a clause.
  */
 public class Data {
-	/**
-	 * Store the title of clause.
-	 */	
-	private String clause;
+	
+	/** The title of this clause. */	
+	private String title;
+	
+	/** The information of this clause. */
+	private String info;
+	
+	/** The clause ID */
+	private int ID;
+	
+//	/** Constructs the empty class. */
+//	Data() {
+//		setClause("");
+//		setInfor("");
+//		setId(0);		
+//	}
 	
 	/**
-	 * Store the information of the clause.
+	 * Constructs a clause with the given title.
+	 * 
+	 * @param title the title
 	 */
-	private String infor;
-	
-	/**
-	 * ID is used to
-	 */
-	private int id;
-	
-	/**
-	 * Construct the empty class.
-	 */
-	Data(){
-		setClause("");
-		setInfor("");
-		setId(0);		
+	Data(String title){
+		this(title, "");
 	}
 	
 	/**
-	 * Construct the class with inputs.
-	 * @param a is the clause name.
-	 * @param b is the clause information.
-	 * @param i is the clause id.
+	 * Constructs a clause with the given title and information.
+	 * 
+	 * @param title the title
+	 * @param information the information
 	 */
-	Data(String a, String b, int i){
-		setClause(a);
-		setInfor(b);
-		setId(i);
+	Data(String title, String info){
+		this.title = title;
+		this.info = info;
 	}
 
 	/**
 	 * @return the clause's title.
 	 */
-	public String getClause() {
-		return this.clause;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
-	 * @param clause is a new title of clause.
+	 * Sets the given title to this clause.
+	 * 
+	 * @param title title of the clause.
 	 */
-	public void setClause(String clause) {
-		this.clause = clause;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/**
 	 * @return the information of the clause.
 	 */
-	public String getInfor() {
-		return this.infor;
+	public String getInfo() {
+		return info;
 	}
 
 	/**
-	 * @param inf is the new information about the clause.
+	 * Sets the given information to this clause
+	 *
+	 * @param info information of the clause.
 	 */
-	public void setInfor(String inf) {
-		this.infor = inf;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	/**
-	 * @return the id of clause
+	 * @return the ID of this clause
 	 */
-	public int getId() {
-		return id;
+	public int getID() {
+		return ID;
 	}
 
 	/**
-	 * @param id is new clause id.
+	 * Sets the given ID to this clause
+	 * 
+	 * @param ID is new clause id.
 	 */
-	public void setId(int id) {
-		this.id = id;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 	
 	/**
-	 * Get the string which include the title and information of the clause.
+	 * @return a String representation of this clause.
 	 */
 	@Override
 	public String toString () {
-		return this.clause + "\n" + this.infor;
+		StringBuilder sb = new StringBuilder();
+		sb.append(title + "\n");
+		for (int i = 0; i < title.length(); i++) {
+			sb.append("-");
+		}
+		String infoString = info;
+		if (info.length() == 0) {
+			infoString = "<EMPTY>";
+		}
+		sb.append("\n" + infoString + "\n");
+		return sb.toString();
 	}
 }

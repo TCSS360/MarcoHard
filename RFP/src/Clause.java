@@ -1,8 +1,13 @@
+import java.io.Serializable;
+
 /**
- * The Data class will store the title and information of a clause.
+ * This class represents a clause.
  */
-public class Data {
-	
+public class Clause implements Serializable {
+
+	/** The serial version UID. */
+	private static final long serialVersionUID = -9077504892430983770L;
+
 	/** The title of this clause. */	
 	private String title;
 	
@@ -12,19 +17,12 @@ public class Data {
 	/** The clause ID */
 	private int ID;
 	
-//	/** Constructs the empty class. */
-//	Data() {
-//		setClause("");
-//		setInfor("");
-//		setId(0);		
-//	}
-	
 	/**
 	 * Constructs a clause with the given title.
 	 * 
 	 * @param title the title
 	 */
-	Data(String title){
+	Clause(String title){
 		this(title, "");
 	}
 	
@@ -34,7 +32,7 @@ public class Data {
 	 * @param title the title
 	 * @param information the information
 	 */
-	Data(String title, String info){
+	Clause(String title, String info){
 		this.title = title;
 		this.info = info;
 	}

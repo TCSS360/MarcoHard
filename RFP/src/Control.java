@@ -1,40 +1,75 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
- * This class represents all categories.
+ * This class represents a control to all categories.
  */
-public class Control {
-	/** A list that holds all categories */	
+public class Control implements Serializable {
+	
+	/** The serial version UID. */
+	private static final long serialVersionUID = -1865987846022596672L;
+
+	private static final String password = "MACROHARD123";
+	
+	/** All categories */
 	private List<Category> cats;
 	
 	/**
 	 * Initializes a control for storing all categories.
 	 */
-	Control(){
-		cats = new ArrayList<Category>();		
+	Control() {
+		cats = new ArrayList<Category>();
 	}
 	
 	/**
 	 * Adds the given category to the control.
 	 * 
-	 * @param cat the category.
+	 * @param cat the category
+	 * @exception IllegalArgumentException if the control contains a category with the same name
 	 */
-	public void addCategory(Category cat){
+	public void addCategory(Category cat) {
+		for (int i = 0; i < cats.size(); i++) {
+			if (cats.get(i).getName().equals(cat.getName())) {
+				throw new IllegalArgumentException("The control contains a category with the same name.");
+			}
+		}
 		cats.add(cat);
 	}
 	
 	/**
-	 * Renames the category.
-	 * @param index is the category which wants to rename.
-	 * @param st is a new name.
+	 * Returns the category.
+	 * 
+	 * @param index the index of the category.
+	 * 
+	 * @return the category.
 	 */
-	public void renameCategory(int index, String st){
-		this.cats.get(index).setName(st);
+	public Category getCategory(int index){
+		return cats.get(index);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < cats.size(); i++) {
+			sb.append(cats.get(i).toString() + "\n\n");
+		}
+		return sb.toString();
+	}
+
+//	/**
+//	 * Renames the category.
+//	 * 
+//	 * @param index is the category which wants to rename.
+//	 * @param st is a new name.
+//	 */
+//	public void renameCategory(int index, String st){
+//		this.cats.get(index).setName(st);
+//	}
 
 	
 //	/**
@@ -47,91 +82,79 @@ public class Control {
 //	}
 	
 	/**
-	 * Delete the category by its name.
-	 * @param name is the category's name.
+	 * Deletes the category that has the given name.
+	 * 
+	 * @param name category's name.
+	 * @exception IllegalArgumentException if the control doesn't contain such category
 	 */
 	public void deleteCategory(String name){
-		//There is at least one category in the array.
-		if(this.cats.size() != 0){
-			for(int i = 0; i < this.cats.size(); i++){
-				if(name.equalsIgnoreCase(this.cats.get(i).getName())){
-					this.cats.remove(i);
-					break;
-				}
-			}
+		int i = -1;
+		do {
+			i++;
+		} while (i <= cats.size() || !cats.get(i).getName().equals(name));
+	
+		if (i > cats.size()) {
+			throw new IllegalArgumentException("Does not contain such category.");
+		} else {
+			cats.remove(i);
 		}
 	}
 	
-//	/**
-//	 * Loading categories and clauses from the text file. 
-//	 * @param name is file's name.
-//	 * @throws FileNotFoundException
-//	 */
-//	public void readFile(String name) throws FileNotFoundException {
-//		File file = new File(name);
-//		Scanner input = new Scanner(file);
-//		ArrayList<Category> temp = new ArrayList<Category>();
-//		int index = 0;
-//		Boolean catFlag = true;
-//		Boolean clFlag = false;
-//		Boolean infoFlag = false;
-//		StringBuilder st = new StringBuilder();
-//		
-//		//Loop until the end of file		
-//		while(input.hasNextLine()){
-//			String line = input.nextLine();
-//			
-//			//Create new category.
-//			if(catFlag){ 
-//				temp.add(new Category(line));
-//				index = temp.size() - 1;
-//				catFlag = false;
-//			}			
-//			
-//			//All ready get all clause information
-//			if(line.equals("End-Clause:")){
-//				temp.get(index).modifyClauseInfor(temp.get(index).size() - 1, st.toString());
-//				infoFlag = false;
-//			}
-//			
-//			//Get the clause's information.
-//			if(infoFlag){
-//				if(st.length() != 0)
-//					st.append("\n");
-//				else
-//					st.append(line);
-//			}			
-//			
-//			//Get the clause title then create new clause without clause body.
-//			if(clFlag){
-//				temp.get(index).add(new Data(line, "", temp.get(index).size()));
-//				clFlag = false;
-//				infoFlag = true;
-//			}
-//			
-//			//End of current category.
-//			if(line.equals("End-Category"))
-//				catFlag = true;
-//			
-//			//Create new clause.
-//			if(line.equals("Clause:")){
-//				clFlag = true;
-//			}			
-//		}
-//		this.cats = temp;
-//		input.close();
-//	}
+	public boolean passwordMatch(String input) {
+		return password.equals(input);
+	}
 	
+	public void save(Control c, String fileName) {
+		try {
+			ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(fileName));
+			save.writeObject(c);
+			save.flush();
+			save.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
-//	
+	public Control load(String fileName) {
+		Control c = null;
+		try {
+			ObjectInputStream load = new ObjectInputStream(new FileInputStream(fileName));
+			c = (Control) load.readObject();
+			load.close();
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		return c;
+	}
+	
 //	public static void main(String[] args){
 //		Control c = new Control();
+//		Category cat1 = new Category("Category1");
+//		cat1.add(new Clause("title 1", "info 1"));
+//		cat1.add(new Clause("TITLE  1", "INFO   1"));
+//		Category cat2 = new Category("Category22222");
+//		cat2.add(new Clause("TITLE222222", "INFOOOO22222"));
+//		Category cat3 = new Category("Category 3!");
+//		c.addCategory(cat1);
+//		c.addCategory(cat2);
+//		c.addCategory(cat3);
+//		
+//		System.out.println(c.toString());
 //		try {
-//			c.readFile("data.txt");
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
+//			ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("default.ser"));
+//			save.writeObject(c);
+//			save.flush();
+//			save.close();
+//		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		System.out.println(c.cat.toString());
+//		try {
+//			ObjectInputStream load = new ObjectInputStream(new FileInputStream("default.ser"));
+//			Control restore = (Control) load.readObject();
+//			load.close();
+//			System.out.println(restore.toString());
+//		} catch (Exception e) {
+//			e.printStackTrace();			
+//		}
 //	}
 }

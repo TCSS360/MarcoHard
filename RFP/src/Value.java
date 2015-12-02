@@ -11,7 +11,7 @@ public class Value {
 	public Value(String name, int id){
 		this.categoryName = name;
 		this.clauseID = id;
-		counter = 0;
+		counter = 1;
 	}
 
 	/**
@@ -27,7 +27,12 @@ public class Value {
 	public String getCategoryName() {
 		return this.categoryName;
 	}
-	
+	/** 
+	 * @return the counter
+	 */
+	public int getCount(){
+		return this.counter;
+	}
 	/**
 	 * Increasing the counter.
 	 */

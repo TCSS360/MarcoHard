@@ -25,19 +25,19 @@ public class MyHashMap <K, V>{
 	 */
 	public void put(K searchKey, V value){		
 		int index = hashCode(searchKey);
-		
-		//If the node is not empty then then put a new value into this node.
-		while(bucket[index] != null){
-			if(bucket[index].key.equals(searchKey)){
-				bucket[index].addValue(value);
-				break;
-			} else {
-				index = (index + 1) % bucket.length;
-			}
-		}
 		//If the node is empty then then put a new value and key into this node.
 		if(bucket[index] == null){
-			bucket[index] = new Nodes<K, V>( searchKey, value);
+			bucket[index] = new Nodes<K, V>(searchKey, value);
+		} else {
+			//If the node is not empty then then put a new value into this node.
+			while(bucket[index] != null){
+				if(bucket[index].key.equals(searchKey)){
+					bucket[index].addValue(value);
+					break;
+				} else {
+					index = (index + 1) % bucket.length;
+				}
+			}
 		}
 	}
 	
@@ -103,11 +103,11 @@ public class MyHashMap <K, V>{
 	 */
 	private class Nodes<K, V>{
 		private K key;
-		private ArrayList<V> value;
+		private ArrayList<V> values = new ArrayList<V>();
 		
 		public Nodes(K key, V value){
 			this.key = key;
-			this.value = new ArrayList<V>();;
+			addValue(value);
 		}
 		
 		/**
@@ -115,15 +115,19 @@ public class MyHashMap <K, V>{
 		 * @param value
 		 */
 		public void addValue(V value){
-			boolean exist = false;
-			for(int i = 0; i < this.value.size(); i++){
-				if(this.value.get(i).equals(value)){
-					exist = true;
-					break;
+			if(this.values.size() != 0){
+				boolean exist = false;
+				for(int i = 0; i < this.values.size(); i++){
+					if(this.values.get(i).equals(value)){
+						exist = true;
+						break;
+					}
 				}
+				
+				if(!exist) this.values.add(value);
+			} else {
+				this.values.add(value);
 			}
-			
-			if(!exist) this.value.add(value);
 		}
 		
 		/**
@@ -131,7 +135,7 @@ public class MyHashMap <K, V>{
 		 * @return the value array
 		 */
 		public ArrayList<V> getValue(){			
-			return this.value;
+			return this.values;
 		}
 	}
 }

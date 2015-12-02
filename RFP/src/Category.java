@@ -45,6 +45,10 @@ public class Category {
 	 */
 	public void delete(int index) {
 		this.clauses.remove(index);
+		//Reset the clause ID after remove clauses
+		for(int i = index - 1; i < this.clauses.size(); i++){
+			this.clauses.get(i).setID(i);
+		}
 	}
 	
 	/**
@@ -122,7 +126,8 @@ public class Category {
 	public String toString(){
 		StringBuilder st = new StringBuilder();
 		st.append("\n" + this.name);		
-		st.append("\nThere are " + this.clauses.size() + " clauses in this category.\n");
+		st.append("\nThere are " + this.clauses.size() + " clauses in this category.\n\n"
+				+ "");
 		
 		for(int i = 0; i < this.clauses.size(); i++){
 			st.append(this.clauses.get(i).toString());

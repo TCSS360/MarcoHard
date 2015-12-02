@@ -11,22 +11,22 @@ import org.junit.Test;
  * @author Ken
  *
  */
-public class DataTest {
+public class ClauseTest {
 	
-	Data test;
-	Data test2;
+	Clause test;
+	Clause test2;
 
 	/**
 	 * 
 	 */
 	@Before
 	public void setUp() {
-		test = new Data("Clause 1", "Info");
-		test2 = new Data("Clause 2");
+		test = new Clause("Clause 1", "Info", 0);
+		test2 = new Clause("Clause 2");
 	}
 
 	/**
-	 * Test method for {@link Data#getTitle()}.
+	 * Test method for {@link Clause#getTitle()}.
 	 */
 	@Test
 	public void testGetTitle() {
@@ -40,7 +40,7 @@ public class DataTest {
 	}
 
 	/**
-	 * Test method for {@link Data#getInfo()}.
+	 * Test method for {@link Clause#getInfo()}.
 	 */
 	@Test
 	public void testGetInfo() {
@@ -55,7 +55,7 @@ public class DataTest {
 	}
 
 	/**
-	 * Test method for {@link Data#getID()}.
+	 * Test method for {@link Clause#getID()}.
 	 */
 	@Test
 	public void testGetID() {
@@ -66,7 +66,7 @@ public class DataTest {
 	}
 
 	/**
-	 * Test method for {@link Data#toString()}.
+	 * Test method for {@link Clause#toString()}.
 	 */
 	@Test
 	public void testToString() {

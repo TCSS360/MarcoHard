@@ -1,7 +1,7 @@
 /**
  * The Data class will store the title and information of a clause.
  */
-public class Data {
+public class Clause {
 	
 	/** The title of this clause. */	
 	private String title;
@@ -24,8 +24,8 @@ public class Data {
 	 * 
 	 * @param title the title
 	 */
-	Data(String title){
-		this(title, "");
+	Clause(String title){
+		this(title, "", 0);		
 	}
 	
 	/**
@@ -34,9 +34,10 @@ public class Data {
 	 * @param title the title
 	 * @param information the information
 	 */
-	Data(String title, String info){
+	Clause(String title, String info, int id){
 		this.title = title;
 		this.info = info;
+		this.ID = id;
 	}
 
 	/**

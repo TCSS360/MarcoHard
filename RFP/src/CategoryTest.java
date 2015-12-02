@@ -14,8 +14,8 @@ import org.junit.Test;
 public class CategoryTest {
 	
 	Category test;
-	Data clause1;
-	Data clause3;
+	Clause clause1;
+	Clause clause3;
 
 	/**
 	 * 
@@ -23,12 +23,12 @@ public class CategoryTest {
 	@Before
 	public void setUp() {
 		test = new Category("Category 1");
-		clause1 = new Data("clause 1", "this is the info.");
-		clause3 = new Data("clause 3");
+		clause1 = new Clause("clause 1", "this is the info.", 0);
+		clause3 = new Clause("clause 3");
 	}
 	
     /**
-     * Test method for {@link Category#delete(Data)}
+     * Test method for {@link Category#delete(Clause)}
      * when the given clause is not found.
      */
     @Test(expected = IllegalArgumentException.class)
@@ -37,12 +37,12 @@ public class CategoryTest {
     }
 
     /**
-     * Test method for {@link Category#delete(Data)} when the given clause is not
+     * Test method for {@link Category#delete(Clause)} when the given clause is not
      * found because they are different objects, even though they have the same title.
      */
     @Test(expected = IllegalArgumentException.class)
     public void exceptionTestDelete2() {
-    	test.add(new Data("clause 1"));
+    	test.add(new Clause("clause 1"));
     	test.delete(clause1);
     }
     
@@ -54,7 +54,7 @@ public class CategoryTest {
 		assertEquals(0, test.size());
 		
 		test.add(clause1);
-		test.add(new Data("clause 2"));
+		test.add(new Clause("clause 2"));
 		assertEquals(2, test.size());
 
 		test.delete(clause1);

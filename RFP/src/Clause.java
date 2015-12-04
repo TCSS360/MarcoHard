@@ -36,7 +36,19 @@ public class Clause implements Serializable {
 		this.title = title;
 		this.info = info;
 	}
-
+	
+	/**
+	 * Constructs a clause with the given title and information.
+	 * 
+	 * @param title the title
+	 * @param information the information
+	 */
+	Clause(String title, String info, int id){
+		this.title = title;
+		this.info = info;
+		this.ID = id;
+	}
+	
 	/**
 	 * @return the clause's title.
 	 */

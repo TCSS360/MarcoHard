@@ -14,6 +14,7 @@ public class MyHashMap <K, V>{
 	/**
 	 * HashMap constructor.
 	 */
+	@SuppressWarnings("unchecked")
 	MyHashMap(){
 		bucket = new Nodes[32768];
 	}
@@ -68,11 +69,11 @@ public class MyHashMap <K, V>{
 	 */
 	public boolean constainsKey(K searchKey){
 		boolean flag = false;
-		K search = (K) searchKey.toString().toLowerCase();
-		int index = hashCode(search);
+//		K search = (K) searchKey.toString().toLowerCase();
+		int index = hashCode(searchKey);
 		
 		while(bucket[index] != null){
-			if(bucket[index].key.equals(search)){
+			if(bucket[index].key.equals(searchKey)){
 				flag = true;
 				break;
 			} else {
@@ -101,13 +102,14 @@ public class MyHashMap <K, V>{
 	 * @param <K> is the String for searching.
 	 * @param <V> is the value object which contains category name and its clauses.
 	 */
+	@SuppressWarnings("hiding")
 	private class Nodes<K, V>{
 		private K key;
 		private ArrayList<V> values = new ArrayList<V>();
 		
 		public Nodes(K key, V value){
 			this.key = key;
-			addValue(value);
+			values.add(value);
 		}
 		
 		/**
@@ -125,7 +127,9 @@ public class MyHashMap <K, V>{
 				}
 				
 				if(!exist) this.values.add(value);
-			} else {
+			} 
+			
+			if(this.values.size() == 0){
 				this.values.add(value);
 			}
 		}

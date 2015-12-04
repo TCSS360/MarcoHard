@@ -23,7 +23,7 @@ public class Category implements Serializable {
 	 */
 	public Category(String name) {		
 		this.name = name;
-		clauses = new ArrayList<>();
+		this.clauses = new ArrayList<>();
 	}
 
 	/**
@@ -33,22 +33,25 @@ public class Category implements Serializable {
 	 * @exception IllegalArgumentException if the category contains a clause with the same title
 	 */
 	public void add(Clause clause) {
-		for (int i = 0; i < clauses.size(); i++) {
-			if (clauses.get(i).getTitle().equals(clause.getTitle())) {
+		for (int i = 0; i < this.clauses.size(); i++) {
+			if (this.clauses.get(i).getTitle().equals(clause.getTitle())) {
 				throw new IllegalArgumentException("The category contains a clause with the same title.");
 			}
 		}
 		clauses.add(clause);
 	}
 	
-//	/**
-//	 *  Removes the clause from the category.
-//	 * 
-//	 *  @param index the index
-//	 */
-//	public void delete(int index) {
-//		clauses.remove(index);
-//	}
+	/**
+	 * Removing the clause from the category by using its ID.
+	 * @param index
+	 */
+	public void delete(int index) {
+		this.clauses.remove(index);
+		//Reset the clause ID after remove clauses
+		for(int i = index - 1; i < this.clauses.size(); i++){
+			this.clauses.get(i).setID(i);
+		}
+	}
 
 	/**
 	 * Removes the given clause from the category.
@@ -56,7 +59,7 @@ public class Category implements Serializable {
 	 * @param clause the clause
 	 */
 	public void delete(Clause clause) {
-		if (!clauses.remove(clause)) {
+		if (!this.clauses.remove(clause)) {
 			throw new IllegalArgumentException("Does not contain the given clause.");
 		}
 	}
@@ -70,33 +73,42 @@ public class Category implements Serializable {
 		return clauses.size();
 	}
 	
-//	/**
-//	 * Modify given clause in the category.
-//	 * 
-//	 * @param index is the clause which want to modify.
-//	 * @param cl a new clause.
-//	 */
-//	public void modifyInformation(int index, Clause cl){
-//		clause.set(index, cl);
-//	}
-//	
-//	/**
-//	 * Modify the title of clause in the category.
-//	 * @param index the clause which want to modify.
-//	 * @param title a new title of clause.
-//	 */
-//	public void modifyClauseTitle(int index, String title){
-//		clause.get(index).setClause(title);
-//	}
-//	
-//	/**
-//	 * Modify the information of clause in the category.
-//	 * @param index is the clause which want to modify.
-//	 * @param infor is a new information of clause.
-//	 */
-//	public void modifyClauseInfor(int index, String infor){
-//		clause.get(index).setInfor(infor);
-//	}
+	/**
+	 * Modify given clause in the category.
+	 * 
+	 * @param index is the clause which want to modify.
+	 * @param cl a new clause.
+	 */
+	public void modifyInformation(int index, Clause cl){
+		this.clauses.set(index, cl);
+	}
+	
+	/**
+	 * Modify the title of clause in the category.
+	 * @param index the clause which want to modify.
+	 * @param title a new title of clause.
+	 */
+	public void modifyClauseTitle(int index, String title){
+		this.clauses.get(index).setTitle(title);
+	}
+	
+	/**
+	 * Modify the information of clause in the category.
+	 * @param index is the clause which want to modify.
+	 * @param infor is a new information of clause.
+	 */
+	public void modifyClauseInfo(int index, String infor){
+		this.clauses.get(index).setInfo(infor);
+	}
+	
+	/**
+	 * Get the clause at the index i
+	 * @param index 
+	 * @return the clause
+	 */
+	public Clause getClause(int index){
+		return clauses.get(index);
+	}
 	
 	/**
 	 * @return the name of the category.
@@ -118,26 +130,26 @@ public class Category implements Serializable {
 	 */
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		String header = "Category: " + name;
-		if (clauses.size() < 2) {
-			header = header + " (" + clauses.size() + " clause)";
-		} else {
-			header = header + " (" + clauses.size() + " clauses)";
-		}
-		sb.append(header + "\n");
-		for (int i = 0; i < header.length(); i++) {
-			sb.append('=');
-		}
-		sb.append("\n");
+//		String header = "Category: " + name;
+//		if (clauses.size() < 2) {
+//			header = header + " (" + clauses.size() + " clause)";
+//		} else {
+//			header = header + " (" + clauses.size() + " clauses)";
+//		}
+//		sb.append(header + "\n");
+//		for (int i = 0; i < header.length(); i++) {
+//			sb.append('=');
+//		}
+//		sb.append("\n");
 		if (clauses.size() != 0) {
 			sb.append(clauses.get(0).toString());
 		}
 		for(int i = 1; i < clauses.size(); i++){
 			sb.append("\n" + clauses.get(i).toString());
 		}
-		for (int i = 0; i < header.length(); i++) {
-			sb.append('=');
-		}
+//		for (int i = 0; i < header.length(); i++) {
+//			sb.append('=');
+//		}
 		return sb.toString();
 	}
 }

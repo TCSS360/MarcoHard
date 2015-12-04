@@ -38,5 +38,5 @@ public class Value {
 	 */
 	public void IncreaseCount(){
 		this.counter++;
-	}
+	}	
 }

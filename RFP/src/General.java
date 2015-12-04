@@ -1,7 +1,13 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.text.*;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
@@ -9,6 +15,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -24,6 +31,7 @@ import java.util.ArrayList;
 import javax.swing.JMenuItem;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.DefaultEditorKit;
 
 import java.awt.Dimension;
 
@@ -81,12 +89,13 @@ public class General {
 		
 		frame = new JFrame("LANGUAGE LIBRARY");
 		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		
 		/*
 		 * Set up the menu bar
 		 */
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);		
 		JMenu mnFile = new JMenu("File");
 		mnFile.setMnemonic('f');
 		mnFile.setHorizontalAlignment(SwingConstants.CENTER);
@@ -123,6 +132,9 @@ public class General {
 		textArea = new JTextArea(1,10);
 		textArea.setLineWrap(true);			//Making the long line to fit into text area
 		textArea.setWrapStyleWord(true);	//by going to new line with the whole last word
+		textArea.setEditable(false); 
+		
+	    textArea.setComponentPopupMenu(popup());
 		
 		JScrollPane textPane = new JScrollPane(textArea);
 		textPane.setPreferredSize(new Dimension(300,200));
@@ -177,25 +189,27 @@ public class General {
 		searchField.setHorizontalAlignment(SwingConstants.CENTER);
 		search_panel.add(searchField);
 		searchField.setColumns(60);
+		searchField.setComponentPopupMenu(popup());
 		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnSearch.addActionListener(new ActionListener(){			
 			public void actionPerformed(ActionEvent arg0) {
-				ArrayList<Clause> search_clause = c.search(searchField.getText(), hash);
-				textArea.setText("");
-				list.clearSelection();
-				if(search_clause.size() == 0){
-					textArea.append("There is no clause.");
-				} else {
-					for(int i = 0; i < search_clause.size(); i++){
-						textArea.append(search_clause.get(i).toString());
-						if(i != search_clause.size()-1)
-							textArea.append("\n");
+				if(!searchField.getText().equals("")){
+					ArrayList<Clause> search_clause = c.search(searchField.getText(), hash);
+					textArea.setText("");
+					list.clearSelection();
+					if(search_clause.size() == 0){
+						textArea.append("There is no clause.");
+					} else {
+						for(int i = 0; i < search_clause.size(); i++){
+							textArea.append(search_clause.get(i).toString());
+							if(i != search_clause.size()-1)
+								textArea.append("\n");
+						}
 					}
+					textArea.setCaretPosition(0);		
 				}
-				textArea.setCaretPosition(0);
-
 			}			
 		});
 		search_panel.add(btnSearch);
@@ -220,8 +234,28 @@ public class General {
                 System.exit(0);
 		      }
 		});
-		opt_panel.add(btnNewButton);		
-		
+		opt_panel.add(btnNewButton);
 	}
-
+	
+	/**
+	 * Pop-up menu when right click on the text area
+	 * This menu has copy, cut, and paste functions
+	 * @return pop-up menu
+	 */
+	public JPopupMenu popup(){
+		JPopupMenu popup = new JPopupMenu();	    
+	    JMenuItem item = new JMenuItem(new DefaultEditorKit.CutAction());
+	    item.setText("Cut");
+	    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+	    popup.add(item);
+	    item = new JMenuItem(new DefaultEditorKit.CopyAction());
+	    item.setText("Copy");
+	    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+	    popup.add(item);
+	    item = new JMenuItem(new DefaultEditorKit.PasteAction());
+	    item.setText("Paste");
+	    item.setAccelerator(KeyStroke.getKeyStroke("control V"));
+	    popup.add(item);	    
+	    return popup;
+	}	
 }

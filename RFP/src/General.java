@@ -1,8 +1,4 @@
-import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.text.*;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,7 +11,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -89,7 +84,8 @@ public class General {
 		
 		frame = new JFrame("LANGUAGE LIBRARY");
 		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		
 		/*
 		 * Set up the menu bar

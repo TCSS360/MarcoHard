@@ -262,9 +262,9 @@ public class Control implements Serializable {
 	/**
 	 * Find the clauses which match to the input string.
 	 * @param st is the searching String.
+	 * @param myHash is the hash table
 	 */
-//	public ArrayList<Clause> search(String st){
-	public ArrayList<Clause> search(String st, MyHashMap<String,Value> myHash){		 	
+	public ArrayList<Value> search(String st, MyHashMap<String,Value> myHash){		 	
 		ArrayList<String> words = split(st);	//Splitting the string into individual words
 		
 		//Get the clauses which contains the words in the input string		
@@ -288,8 +288,7 @@ public class Control implements Serializable {
 					result.add(temp.get(j));
 			}
 		}
-		
-				
+						
 		//Using bubble sort to sort the result array to descending 
 		if(result.size()>2){
 			for(int i = 0; i < result.size()-1; i++) {
@@ -305,11 +304,17 @@ public class Control implements Serializable {
 				if(!swap) break;
 			}	
 		}
-		/*
-		 * Looking for the clauses that match with the list of value objects just found.
-		 * The value object contains the category name and clause ID which is the location
-		 * of the clause in the category.
-		 */
+		return result;		
+	}
+	
+	/**
+	 * Looking for the clauses that match with the list of value objects just found.
+	 * The value object contains the category name and clause ID which is the location
+	 * of the clause in the category.
+	 * @param result is a list of value objects
+	 * @return the list of clauses that match to the string input
+	 */
+	public ArrayList<Clause> getClauseFromSearch(ArrayList<Value> result){
 		ArrayList<Clause> toReturn = new ArrayList<Clause>();
 		for(int i = 0; i < result.size(); i++){
 			for(int j = 0; j < this.cats.size(); j++){

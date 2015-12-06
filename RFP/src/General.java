@@ -38,7 +38,7 @@ public class General {
 
 	private JFrame frame;
 	private JTextField searchField;
-	private Control c;
+	private Control RFP;
 	@SuppressWarnings("rawtypes")
 	private JList list;
 	private JTextArea textArea;
@@ -73,14 +73,14 @@ public class General {
 		
 		try {
 			ObjectInputStream load = new ObjectInputStream(new FileInputStream("default.ser"));
-			c = (Control) load.readObject();
+			RFP = (Control) load.readObject();
 			load.close();
 //			System.out.println(restore.toString());
 		} catch (Exception e) {
 			e.printStackTrace();			
 		}
-		MyHashMap<String,Value> hash = c.fillHashMap();
-		String[] cat_name = c.getCategoryName();		
+		MyHashMap<String,Value> hash = RFP.fillHashMap();
+		String[] cat_name = RFP.getCategoryName();		
 		
 		frame = new JFrame("LANGUAGE LIBRARY");
 		frame.setBounds(100, 100, 800, 600);
@@ -154,12 +154,12 @@ public class General {
 		list.addListSelectionListener(new ListSelectionListener() {
 		      public void valueChanged(ListSelectionEvent e) {		    	  
 		    	  if(!e.getValueIsAdjusting()){
-//		    		  Category cat = c.getCategory(list.getSelectedIndex());
+//		    		  Category cat = RFP.getCategory(list.getSelectedIndex());
 //		    		  textArea.setText("");
 //		    		  textArea.append(cat.toString());
 //		    		  textArea.setCaretPosition(textArea.getDocument().getLength());
 		    	  } else {
-		    		  Category cat = c.getCategory(list.getSelectedIndex());
+		    		  Category cat = RFP.getCategory(list.getSelectedIndex());
 		    		  textArea.setText("");
 		    		  textArea.append(cat.toString());		    		  
 		    		  textArea.setCaretPosition(0);//set the start point from beginning of the text
@@ -191,8 +191,8 @@ public class General {
 		btnSearch.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnSearch.addActionListener(new ActionListener(){			
 			public void actionPerformed(ActionEvent arg0) {
-				if(!searchField.getText().equals("")){
-					ArrayList<Clause> search_clause = c.search(searchField.getText(), hash);
+				if(!searchField.getText().equals("")){					
+					ArrayList<Clause> search_clause = RFP.getClauseFromSearch(RFP.search(searchField.getText(), hash));
 					textArea.setText("");
 					list.clearSelection();
 					if(search_clause.size() == 0){

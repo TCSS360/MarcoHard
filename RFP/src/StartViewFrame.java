@@ -16,6 +16,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -45,7 +46,7 @@ public class StartViewFrame {
 	
 	private JFrame frame;
 	
-	private Control control;
+	private Control RFP;
 	
 	private JTextArea textArea;
 	
@@ -166,14 +167,14 @@ public class StartViewFrame {
 	 */
 	try {
 		ObjectInputStream load = new ObjectInputStream(new FileInputStream("default.ser"));
-		control = (Control) load.readObject();
+		RFP = (Control) load.readObject();
 		load.close();
 //		System.out.println(restore.toString());
 	} catch (Exception e) {
 		e.printStackTrace();			
 	}
-	MyHashMap<String,Value> hash = control.fillHashMap();
-	String[] cat_name = control.getCategoryName();		
+	MyHashMap<String,Value> hash = RFP.fillHashMap();
+	String[] cat_name = RFP.getCategoryName();		
 	/*
 	 * Create the new window
 	 */
@@ -249,23 +250,35 @@ public class StartViewFrame {
 	list.setVisibleRowCount(-1);
 	list.addListSelectionListener(new ListSelectionListener() {
 	      public void valueChanged(ListSelectionEvent e) {		    	  
-	    	  if(!e.getValueIsAdjusting()){
-//	    		  Category cat = c.getCategory(list.getSelectedIndex());
-//	    		  textArea.setText("");
-//	    		  textArea.append(cat.toString());
-//	    		  textArea.setCaretPosition(textArea.getDocument().getLength());
-	    	  } else {
-	    		  Category cat = control.getCategory(list.getSelectedIndex());
+	    	  if(e.getValueIsAdjusting()){
+	    		  Category cate = RFP.getCategory(list.getSelectedIndex());
 	    		  textArea.setText("");
-	    		  textArea.append(cat.toString());		    		  
-	    		  textArea.setCaretPosition(0);//set the start point from beginning of the text
-	    		  
-	    		  //set the start point at the end of the text
-//	    		  textArea.setCaretPosition(textArea.getDocument().getLength());
+	    		  textArea.append(cate.toString());		    		  
+	    		  textArea.setCaretPosition(0);
 	    	  }
 	      }
 	});
-//	list.setSelectedIndex(0);	//Default is selected the first category	
+	list.addKeyListener(new KeyAdapter(){
+		  public void keyPressed(KeyEvent key){
+			  int index = RFP.getCategoryName().length - 1;
+			  if(key.getKeyCode() == KeyEvent.VK_DOWN && list.getSelectedIndex() != index){
+				  Category cate = RFP.getCategory(list.getSelectedIndex()+1);
+				  textArea.setText("");
+	    		  textArea.append(cate.toString());		    		  
+	    		  textArea.setCaretPosition(0);
+			  }
+		  }
+	});
+	list.addKeyListener(new KeyAdapter(){
+		  public void keyPressed(KeyEvent key){
+			  if(key.getKeyCode() == KeyEvent.VK_UP && list.getSelectedIndex() != 0){
+				  Category cate = RFP.getCategory(list.getSelectedIndex()-1);
+				  textArea.setText("");
+	    		  textArea.append(cate.toString());		    		  
+	    		  textArea.setCaretPosition(0);
+			  }
+		  }
+	});
 	JScrollPane listPane = new JScrollPane(list);
 	cat_panel.add(listPane);
 	
@@ -288,7 +301,7 @@ public class StartViewFrame {
 	btnSearch.addActionListener(new ActionListener(){			
 		public void actionPerformed(ActionEvent arg0) {
 			if(!searchField.getText().equals("")){
-				ArrayList<Clause> search_clause = control.search(searchField.getText(), hash);
+				ArrayList<Clause> search_clause = RFP.getClauseFromSearch(RFP.search(searchField.getText(), hash));
 				textArea.setText("");
 				list.clearSelection();
 				if(search_clause.size() == 0){

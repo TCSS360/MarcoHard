@@ -156,8 +156,14 @@ public class StartViewFrame {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void user_GUI(){
-		
+	
+	/**
+	 * 
+	 */
+	private void user_GUI(){		
+	/*
+	 * Load the data from the "default.ser" file
+	 */
 	try {
 		ObjectInputStream load = new ObjectInputStream(new FileInputStream("default.ser"));
 		control = (Control) load.readObject();
@@ -168,7 +174,9 @@ public class StartViewFrame {
 	}
 	MyHashMap<String,Value> hash = control.fillHashMap();
 	String[] cat_name = control.getCategoryName();		
-	
+	/*
+	 * Create the new window
+	 */
 	frame = new JFrame("LANGUAGE LIBRARY");
 	frame.setBounds(100, 100, 800, 600);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -202,6 +210,7 @@ public class StartViewFrame {
 	 */
 	JSplitPane splitPane = new JSplitPane();
 	splitPane.setResizeWeight(0.2);
+	splitPane.setOneTouchExpandable(true);
 	frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 	
 	/*

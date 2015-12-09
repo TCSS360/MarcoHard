@@ -17,7 +17,7 @@ public class Control implements Serializable {
 	/** The serial version UID. */
 	private static final long serialVersionUID = -1865987846022596672L;
 
-	private static final String password = "MACROHARD123";
+	private static final String password = "macrohard";
 	
 	/**
 	 * The hash map holds key as words and value as category name and clause ID
@@ -94,12 +94,20 @@ public class Control implements Serializable {
 		//There is at least one category in the array.
 		if(this.cats.size() != 0){
 			for(int i = 0; i < this.cats.size(); i++){
-				if(name.equalsIgnoreCase(this.cats.get(i).getName())){
+				if(name.equals(this.cats.get(i).getName())){
 					this.cats.remove(i);
 					break;
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Delete the category by its name.
+	 * @param name is the category's name.
+	 */
+	public void deleteCategory(int index){
+		this.cats.remove(index);
 	}
 	
 //	/**
@@ -120,9 +128,20 @@ public class Control implements Serializable {
 //			cats.remove(i);
 //		}
 //	}
-	
-	public boolean passwordMatch(String input) {
-		return password.equals(input);
+		
+	public boolean passwordMatch(char[] input) {
+		boolean match = true;
+		if(password.length() != input.length){
+			match = false;
+		} else {
+			for(int i = 0; i < password.length(); i++){
+				if(password.charAt(i) != input[i]){
+					match = false;
+					break;
+				}
+			}
+		}
+		return match;
 	}
 	
 	public void save(Control c, String fileName) {

@@ -48,7 +48,10 @@ public class Category implements Serializable {
 	public void delete(int index) {
 		this.clauses.remove(index);
 		//Reset the clause ID after remove clauses
-		for(int i = index - 1; i < this.clauses.size(); i++){
+		if(index != 0) 
+			index--;
+		
+		for(int i = index; i < this.clauses.size(); i++){
 			this.clauses.get(i).setID(i);
 		}
 	}

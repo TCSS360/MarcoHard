@@ -239,6 +239,19 @@ public class StartViewFrame {
 		JMenu mnAbout = new JMenu("About ...");
 		menuBar.add(mnAbout);
 		
+		JMenuItem about_the_user = new JMenuItem("Get Familiar With It ...");
+		about_the_user.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(userFrame, "To Exit (Left Click on [File] -> [Exit]) or (Left Click on the [Exit] button found at the bottom right corner of the window).\n"
+						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
+						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
+						+ "The [Search] button can be found at the top right corner of the window.\n"
+						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
+						+ "To learn more about the application, please left click on the [About ...] button found at the top left corner of the window).\n");
+			}
+		});
+		mnAbout.add(about_the_user);
+		
 		/*
 		 * Set up 2 panel for category and clauses
 		 */
@@ -516,6 +529,41 @@ public class StartViewFrame {
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
+		JMenuItem receive_help = new JMenuItem("Receive Help");
+		receive_help.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(adminFrame, "To Exit the application (Left Click on [File] -> [Exit]) or \n"
+						+ "(Left Click on the [Exit] button found at the bottom right corner of the window).\n"
+						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
+						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
+						+ "The [Search] button can be found at the top right corner of the window.\n"
+						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
+						+ "To learn more about how to use the application, please left click on the [Help] button found at the top left corner of the window;\n"
+						+ "you would then left click on the [Receive Help] button under the [Help] button).\n"
+						+ "To create a category (Left Click on the [Create Category] button found at the bottom left corner of the window; \n"
+						+ "you would then enter the name of the category and left click on the [Create] button).\n"
+						+ "To rename a category (Left Click on any of the existing categories found on the list of categories;\n "
+						+ "you would then left click on the [Rename Category] button found at the bottom left corner of the window.\n"
+						+ "After that, enter the new name of the category and left click on the [Rename] button).\n"
+						+ "To remove a category (Left Click on any of the existing categories found on the list of categories;\n"
+						+ "you would then left click on the [Remove Category] button found at the bottom left corner of the window.\n"
+						+ "After that, left click on the [Yes] button).\n"
+						+ "To add a clause (left click on the [Add Clause] button found at the bottom of the window;\n"
+						+ "you would then choose the category in which you want to add a clause in.\n"
+						+ "Make a title for the clause and enter in the proper information.\n"
+						+ "After that, left click the [Save] button).\n"
+						+ "To modify a clause (choose the category in which you want to modify a clause in;\n"
+						+ "you would then left click on the [Modify Clause] button found at the bottom of the window.\n"
+						+ "Make the proper changes to that certain clause.\n"
+						+ "After that, left click the [Save] button).\n"
+						+ "To delete a clause (choose the category in which you want to delete a clause in;\n"
+						+ "you would then left click on the [Delete Clause] button found at the bottom of the window\n"
+						+ "after choosing the clause you wish to delete/remove from that category.\n"
+						+ "Thank You for choosing Macrohard, WE LOVE YOU!\n");
+			}
+		});
+		mnHelp.add(receive_help);
+		
 		/*
 		 * split panel into 2 for category and clauses
 		 */
@@ -747,7 +795,7 @@ public class StartViewFrame {
 			ArrayList<Clause> search_clause = RFP.getClauseFromSearch(searchResult);										
 			if(search_clause.size() == 0){
 				infoClauseArea.setText("");
-				infoClauseArea.append("'No result found.'");
+				infoClauseArea.append("'No result .'");
 				searchClause(search_clause);
 			} else {
 				infoClauseArea.setText("");

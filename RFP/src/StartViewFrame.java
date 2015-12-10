@@ -654,7 +654,12 @@ public class StartViewFrame {
 						adminFrame.setVisible(true);
 						
 					}
+					if(categoryList.isSelectionEmpty()){
+						btnRemoveCategory.setEnabled(false);;
+						btnRename.setEnabled(false);
+					}
 				}
+				
 				RFP.save(RFP, "default.ser");
 			}
 		});

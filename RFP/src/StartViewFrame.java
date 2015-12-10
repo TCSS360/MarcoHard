@@ -236,18 +236,22 @@ public class StartViewFrame {
 		});
 		mnFile.add(mntmExit);
 		
-		JMenu mnAbout = new JMenu("About ...");
+		JMenu mnAbout = new JMenu("Help");		
 		menuBar.add(mnAbout);
 		
 		JMenuItem about_the_user = new JMenuItem("Get Familiar With It ...");
 		about_the_user.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				JOptionPane.showMessageDialog(userFrame, "To Exit (Left Click on [File] -> [Exit]) or (Left Click on the [Exit] button found at the bottom right corner of the window).\n"
-						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
-						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
-						+ "The [Search] button can be found at the top right corner of the window.\n"
-						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
-						+ "To learn more about the application, please left click on the [About ...] button found at the top left corner of the window).\n");
+				JOptionPane.showMessageDialog(userFrame, "To Exit:\n[File] Menu ==> [Exit] or Using [Exit] button at the bottom right corner of the window.\n"
+						+ "To View Clauses:\nChoose category on the list of categories provided.\n"
+						+ "To Search:\nType in a keywords of what you are looking for, then click [Search] button.\n"
+						+ "To Log Out:\nClick on [Log Out] button at the bottom right corner of the window.\n", "Help", JOptionPane.INFORMATION_MESSAGE);
+//				JOptionPane.showMessageDialog(userFrame, "To Exit: \nLeft Click on [File] -> [Exit]) or (Left Click on the [Exit] button found at the bottom right corner of the window).\n"
+//						+ "To View Clauses \n(Left Click on your prefered category on the list of categories provided).\n"
+//						+ "To Search \n(Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
+//						+ "The [Search] button can be found at the top right corner of the window.\n"
+//						+ "To Log Out \n(Left Click on the [Log Out] button found at the bottom right corner of the window).\n");
+//						+ "To learn more about the application, please left click on the [About ...] button found at the top left corner of the window).\n");
 			}
 		});
 		mnAbout.add(about_the_user);
@@ -532,34 +536,47 @@ public class StartViewFrame {
 		JMenuItem receive_help = new JMenuItem("Receive Help");
 		receive_help.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				JOptionPane.showMessageDialog(adminFrame, "To Exit the application (Left Click on [File] -> [Exit]) or \n"
-						+ "(Left Click on the [Exit] button found at the bottom right corner of the window).\n"
-						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
-						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
-						+ "The [Search] button can be found at the top right corner of the window.\n"
-						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
-						+ "To learn more about how to use the application, please left click on the [Help] button found at the top left corner of the window;\n"
-						+ "you would then left click on the [Receive Help] button under the [Help] button).\n"
-						+ "To create a category (Left Click on the [Create Category] button found at the bottom left corner of the window; \n"
-						+ "you would then enter the name of the category and left click on the [Create] button).\n"
-						+ "To rename a category (Left Click on any of the existing categories found on the list of categories;\n "
-						+ "you would then left click on the [Rename Category] button found at the bottom left corner of the window.\n"
-						+ "After that, enter the new name of the category and left click on the [Rename] button).\n"
-						+ "To remove a category (Left Click on any of the existing categories found on the list of categories;\n"
-						+ "you would then left click on the [Remove Category] button found at the bottom left corner of the window.\n"
-						+ "After that, left click on the [Yes] button).\n"
-						+ "To add a clause (left click on the [Add Clause] button found at the bottom of the window;\n"
-						+ "you would then choose the category in which you want to add a clause in.\n"
-						+ "Make a title for the clause and enter in the proper information.\n"
-						+ "After that, left click the [Save] button).\n"
-						+ "To modify a clause (choose the category in which you want to modify a clause in;\n"
-						+ "you would then left click on the [Modify Clause] button found at the bottom of the window.\n"
-						+ "Make the proper changes to that certain clause.\n"
-						+ "After that, left click the [Save] button).\n"
-						+ "To delete a clause (choose the category in which you want to delete a clause in;\n"
-						+ "you would then left click on the [Delete Clause] button found at the bottom of the window\n"
-						+ "after choosing the clause you wish to delete/remove from that category.\n"
-						+ "Thank You for choosing Macrohard, WE LOVE YOU!\n");
+				JOptionPane.showMessageDialog(adminFrame, "To Exit:\n [File] ==> [Exit] or "
+						+ "Click on [Exit] button at the bottom right corner of the window.\n"
+						+ "To Log Out:\nClick on the [Log Out] button at the bottom right corner of the window.\n"
+						+ "To Search:\n Type in keywords of what you are looking for, then click on the [Search] button.\n"
+						+ "To Create a Category:\n Choose [Create Category] button => Enter the name of the category => Click on the [Create] button.\n"
+						+ "To Rename a Category:\n Chose the categories which you want to rename => Click on [Rename Category] button.\n"
+						+ "=> Enter the new name => click on the [Rename] button.\n"
+						+ "To Remove a Category:\n Choose categories you want to remove => Click on [Remove Category] button.\n"						
+						+ "To add a clause:\n Click on [Add Clause] button => Choose 'Category' => Enter the 'Clause title' \n"
+						+ "=> Enter the 'Clause Information' => click the [Save] button.\n"
+						+ "To Modify a Clause:\n Choose a clause which you want to modify => click on [Modify Clause] button\n"
+						+ "=> Make the proper changes to that certain clause => click the [Save] button.\n"
+						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button.");
+//				JOptionPane.showMessageDialog(adminFrame, "To Exit the application (Left Click on [File] -> [Exit]) or \n"
+//						+ "(Left Click on the [Exit] button found at the bottom right corner of the window).\n"
+//						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
+//						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
+//						+ "The [Search] button can be found at the top right corner of the window.\n"
+//						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
+//						+ "To learn more about how to use the application, please left click on the [Help] button found at the top left corner of the window;\n"
+//						+ "you would then left click on the [Receive Help] button under the [Help] button).\n"
+//						+ "To create a category (Left Click on the [Create Category] button found at the bottom left corner of the window; \n"
+//						+ "you would then enter the name of the category and left click on the [Create] button).\n"
+//						+ "To rename a category (Left Click on any of the existing categories found on the list of categories;\n "
+//						+ "you would then left click on the [Rename Category] button found at the bottom left corner of the window.\n"
+//						+ "After that, enter the new name of the category and left click on the [Rename] button).\n"
+//						+ "To remove a category (Left Click on any of the existing categories found on the list of categories;\n"
+//						+ "you would then left click on the [Remove Category] button found at the bottom left corner of the window.\n"
+//						+ "After that, left click on the [Yes] button).\n"
+//						+ "To add a clause (left click on the [Add Clause] button found at the bottom of the window;\n"
+//						+ "you would then choose the category in which you want to add a clause in.\n"
+//						+ "Make a title for the clause and enter in the proper information.\n"
+//						+ "After that, left click the [Save] button).\n"
+//						+ "To modify a clause (choose the category in which you want to modify a clause in;\n"
+//						+ "you would then left click on the [Modify Clause] button found at the bottom of the window.\n"
+//						+ "Make the proper changes to that certain clause.\n"
+//						+ "After that, left click the [Save] button).\n"
+//						+ "To delete a clause (choose the category in which you want to delete a clause in;\n"
+//						+ "you would then left click on the [Delete Clause] button found at the bottom of the window\n"
+//						+ "after choosing the clause you wish to delete/remove from that category.\n"
+//						+ "Thank You for choosing Macrohard, WE LOVE YOU!\n");
 			}
 		});
 		mnHelp.add(receive_help);
@@ -716,7 +733,7 @@ public class StartViewFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!goSearch){
 					RFP.getCategory(categoryList.getSelectedIndex()).delete(titleList.getSelectedIndex());
-					clauseOfCategory();
+					clauseOfCategory();					
 				} else {
 					Value choose = searchResult.get(titleList.getSelectedIndex());
 					for(int i = 0; i < RFP.getCategoryName().length; i++){
@@ -731,8 +748,14 @@ public class StartViewFrame {
 					
 					btnModify.setEnabled(false);
 					btnDel.setEnabled(false);
-					goSearch = true;
+//					goSearch = true;
 				}
+				if(titleList.isSelectionEmpty()){
+					btnDel.setEnabled(false);
+					btnModify.setEnabled(false);
+				}
+				infoClauseArea.setText("");;
+				RFP.save(RFP, "default.ser");
 			}			
 		});
 		clause_btn.add(btnDel);
@@ -885,6 +908,7 @@ public class StartViewFrame {
 		    		  btnModify.setEnabled(false);
 		    		  btnDel.setEnabled(false);
 		    		  searchField.setText("");
+		    		  goSearch = false;
 		    	  }
 		      }
 		});
@@ -899,6 +923,7 @@ public class StartViewFrame {
 					  
 					  btnModify.setEnabled(false);
 					  btnDel.setEnabled(false);
+					  goSearch = false;
 				  }
 			  }
 		});
@@ -912,6 +937,7 @@ public class StartViewFrame {
 					  
 					  btnModify.setEnabled(false);
 					  btnDel.setEnabled(false);
+					  goSearch = false;
 				  }
 			  }
 		});
@@ -1010,16 +1036,21 @@ public class StartViewFrame {
 		create.addActionListener(new ActionListener(){			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String name = textField.getText();
-				RFP.getCategory(categoryList.getSelectedIndex()).setName(name);				
-				categoryPanel.removeAll();
-				
-				displayCategoryList();				
-				
-				adminFrame.repaint();
-				adminFrame.setVisible(true);
-				Cate_frame.dispose();
-				RFP.save(RFP, "default.ser");
+				if(!textField.getText().equals("")){
+					String name = textField.getText();
+					RFP.getCategory(categoryList.getSelectedIndex()).setName(name);				
+					categoryPanel.removeAll();
+					
+					displayCategoryList();				
+					
+					adminFrame.repaint();
+					adminFrame.setVisible(true);
+					Cate_frame.dispose();
+					RFP.save(RFP, "default.ser");
+				} else {
+				JOptionPane.showMessageDialog(adminFrame, "Please enter the name of category !",
+						"Text field is empty", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			
 		});
@@ -1197,16 +1228,22 @@ public class StartViewFrame {
 				if(!comboBox.getSelectedItem().equals("<Choose Category>")){
 					if(!clause_title.getText().equals("")){
 						if(frame_name.equals("Add New Clause")){
-							boolean chosen = categoryList.isSelectionEmpty();						
-							RFP.getCategory(comboBox.getSelectedIndex()-1).add(
+							boolean chosen = categoryList.isSelectionEmpty();
+							if(!RFP.getCategory(comboBox.getSelectedIndex()-1).existClauseTitle(clause_title.getText())){
+								RFP.getCategory(comboBox.getSelectedIndex()-1).add(
 									new Clause(clause_title.getText(),clause_info.getText(),
-											RFP.getCategory(comboBox.getSelectedIndex()-1).size()));							
-							
-							if(!chosen)	clauseOfCategory();							
+										RFP.getCategory(comboBox.getSelectedIndex()-1).size()));							
+								if(!chosen)	clauseOfCategory();
+								addClause.dispose();
+							} else {
+								JOptionPane.showMessageDialog(null, "The clause title is existed.",
+									"Warning", JOptionPane.WARNING_MESSAGE);
+							}
 						}
 						
 						if(frame_name.equals("Modify Clause")){							
-							int index = titleList.getSelectedIndex();							
+							int index = titleList.getSelectedIndex();
+							
 							if(!goSearch){
 								RFP.getCategory(comboBox.getSelectedIndex()-1).modifyInformation(
 									titleList.getSelectedIndex(), new Clause(clause_title.getText(), 
@@ -1231,10 +1268,8 @@ public class StartViewFrame {
 									}
 								}								
 							}
-							
-							
-						}
-						addClause.dispose();
+							addClause.dispose();
+						}						
 					} else {
 						JOptionPane.showMessageDialog(null, "The clause title is empty.",
 								"Warning", JOptionPane.WARNING_MESSAGE);
@@ -1244,6 +1279,7 @@ public class StartViewFrame {
 							"Warning", JOptionPane.WARNING_MESSAGE);
 				}
 				RFP.save(RFP, "default.ser");
+				hash = RFP.fillHashMap();
 			}	
 		});
 		panel_4.add(btnNew);
@@ -1263,25 +1299,26 @@ public class StartViewFrame {
 		addClause.setVisible(true);
 	}
 	
-/**
- * Pop-up menu when right click on the text area
- * This menu has copy, cut, and paste functions
- * @return pop-up menu
- */
-public JPopupMenu popup(){
-	JPopupMenu popup = new JPopupMenu();	    
-    JMenuItem item = new JMenuItem(new DefaultEditorKit.CutAction());
-    item.setText("Cut");
-    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
-    popup.add(item);
-    item = new JMenuItem(new DefaultEditorKit.CopyAction());
-    item.setText("Copy");
-    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
-    popup.add(item);
-    item = new JMenuItem(new DefaultEditorKit.PasteAction());
-    item.setText("Paste");
-    item.setAccelerator(KeyStroke.getKeyStroke("control V"));
-    popup.add(item);	    
-    return popup;
-}
+	/**
+	 * Pop-up menu when right click on the text area
+	 * This menu has copy, cut, and paste functions
+	 * @return pop-up menu
+	 */
+	public JPopupMenu popup(){
+		JPopupMenu popup = new JPopupMenu();	    
+	    JMenuItem item = new JMenuItem(new DefaultEditorKit.CutAction());
+	    item.setText("Cut");
+	    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+	    popup.add(item);
+	    item = new JMenuItem(new DefaultEditorKit.CopyAction());
+	    item.setText("Copy");
+	    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+	    popup.add(item);
+	    item = new JMenuItem(new DefaultEditorKit.PasteAction());
+	    item.setText("Paste");
+	    item.setAccelerator(KeyStroke.getKeyStroke("control V"));
+	    popup.add(item);	    
+	    return popup;
+	}
+	
 }

@@ -309,7 +309,7 @@ public class Control implements Serializable {
 		}
 						
 		//Using bubble sort to sort the result array to descending 
-		if(result.size()>2){
+		if(result.size()>=2){
 			for(int i = 0; i < result.size()-1; i++) {
 				boolean swap = false;
 				for(int j = 0; j < result.size()-1; j++){

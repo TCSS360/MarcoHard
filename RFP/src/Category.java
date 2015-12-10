@@ -30,17 +30,26 @@ public class Category implements Serializable {
 	 * Adds a data to the category.
 	 * 
 	 * @param clause the new clause.
-	 * @exception IllegalArgumentException if the category contains a clause with the same title
 	 */
 	public void add(Clause clause) {
-		for (int i = 0; i < this.clauses.size(); i++) {
-			if (this.clauses.get(i).getTitle().equals(clause.getTitle())) {
-				throw new IllegalArgumentException("The category contains a clause with the same title.");
-			}
-		}
 		clauses.add(clause);
 	}
 	
+	/**
+	 * Check there is the clause with same title
+	 * @param clause wants to check.
+	 * @return true or false
+	 */
+	public boolean existClauseTitle(String title){
+		boolean toReturn = false;
+		for (int i = 0; i < this.clauses.size(); i++) {
+			if (this.clauses.get(i).getTitle().equals(title)) {
+				toReturn = true;
+				break;
+			}
+		}
+		return toReturn;
+	}
 	/**
 	 * Removing the clause from the category by using its ID.
 	 * @param index

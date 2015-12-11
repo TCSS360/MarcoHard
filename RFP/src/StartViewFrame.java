@@ -649,17 +649,20 @@ public class StartViewFrame {
 					if(confirm == JOptionPane.YES_OPTION){
 						RFP.deleteCategory(categoryList.getSelectedIndex());
 						categoryPanel.removeAll();
-						displayCategoryList();				
-						adminFrame.repaint();
-						adminFrame.setVisible(true);
-						
+						displayCategoryList();
+						hash = RFP.fillHashMap();
+						titlePanel.removeAll();						
+						titleScroll = new JScrollPane(new JList());
+						titlePanel.add(titleScroll);
 					}
 					if(categoryList.isSelectionEmpty()){
 						btnRemoveCategory.setEnabled(false);;
 						btnRename.setEnabled(false);
-					}
+					}					
 				}
 				
+				adminFrame.repaint();
+				adminFrame.setVisible(true);
 				RFP.save(RFP, "default.ser");
 			}
 		});
@@ -735,32 +738,37 @@ public class StartViewFrame {
 		btnDel.setEnabled(false);
 		btnDel.addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!goSearch){
-					RFP.getCategory(categoryList.getSelectedIndex()).delete(titleList.getSelectedIndex());
-					clauseOfCategory();					
-				} else {
-					Value choose = searchResult.get(titleList.getSelectedIndex());
-					for(int i = 0; i < RFP.getCategoryName().length; i++){
-						if(choose.getCategoryName().equals(RFP.getCategoryName()[i])){
-							RFP.getCategory(i).delete(choose.getClauseID());
-							break;
+			public void actionPerformed(ActionEvent e) {				
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete '" + 
+						RFP.getCategory(categoryList.getSelectedIndex()).getClause(titleList.getSelectedIndex()).getTitle()
+						+ "' clause?", "Confirm", JOptionPane.YES_NO_OPTION);
+				if(confirm == JOptionPane.YES_OPTION){
+					if(!goSearch){
+						RFP.getCategory(categoryList.getSelectedIndex()).delete(titleList.getSelectedIndex());
+						clauseOfCategory();					
+					} else {
+						Value choose = searchResult.get(titleList.getSelectedIndex());
+						for(int i = 0; i < RFP.getCategoryName().length; i++){
+							if(choose.getCategoryName().equals(RFP.getCategoryName()[i])){
+								RFP.getCategory(i).delete(choose.getClauseID());
+								break;
+							}
 						}
+						hash = RFP.fillHashMap();
+						
+						displaySearchClauseInAdmin();
+						
+						btnModify.setEnabled(false);
+						btnDel.setEnabled(false);
+	//					goSearch = true;
 					}
-					hash = RFP.fillHashMap();
-					
-					displaySearchClauseInAdmin();
-					
-					btnModify.setEnabled(false);
-					btnDel.setEnabled(false);
-//					goSearch = true;
+					if(titleList.isSelectionEmpty()){
+						btnDel.setEnabled(false);
+						btnModify.setEnabled(false);
+					}
+					infoClauseArea.setText("");;
+					RFP.save(RFP, "default.ser");
 				}
-				if(titleList.isSelectionEmpty()){
-					btnDel.setEnabled(false);
-					btnModify.setEnabled(false);
-				}
-				infoClauseArea.setText("");;
-				RFP.save(RFP, "default.ser");
 			}			
 		});
 		clause_btn.add(btnDel);
@@ -1043,10 +1051,13 @@ public class StartViewFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!textField.getText().equals("")){
 					String name = textField.getText();
+					//get the current index
+					int index = categoryList.getSelectedIndex();
 					RFP.getCategory(categoryList.getSelectedIndex()).setName(name);				
 					categoryPanel.removeAll();
 					
 					displayCategoryList();				
+					categoryList.setSelectedIndex(index); //restore the previous index
 					
 					adminFrame.repaint();
 					adminFrame.setVisible(true);

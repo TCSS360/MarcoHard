@@ -59,9 +59,7 @@ public class Control implements Serializable {
 		this.cats.get(index).setName(st);
 	}
 	
-	/**
-	 * Returns the category.
-	 * 
+	/**	 
 	 * @param index the index of the category. 
 	 * @return the category.
 	 */
@@ -69,6 +67,9 @@ public class Control implements Serializable {
 		return cats.get(index);
 	}
 	
+	/**	 
+	 * @return the list of category name
+	 */
 	public String[] getCategoryName(){
 		String[] toReturn = new String[cats.size()];
 		for(int i = 0; i < cats.size(); i++){
@@ -128,7 +129,12 @@ public class Control implements Serializable {
 //			cats.remove(i);
 //		}
 //	}
-		
+	
+	/**
+	 * Check entered password is match with stored password
+	 * @param input is a entered password
+	 * @return true or flase
+	 */
 	public boolean passwordMatch(char[] input) {
 		boolean match = true;
 		if(password.length() != input.length){
@@ -144,6 +150,11 @@ public class Control implements Serializable {
 		return match;
 	}
 	
+	/**
+	 * Save the data into file .ser
+	 * @param c is the Control object
+	 * @param fileName is the name of file
+	 */
 	public void save(Control c, String fileName) {
 		try {
 			ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(fileName));
@@ -155,6 +166,11 @@ public class Control implements Serializable {
 		}
 	}
 	
+	/**
+	 * Loading the data into object
+	 * @param fileName is the name of file which you want to load data.
+	 * @return the object with all data.
+	 */
 	public Control load(String fileName) {
 		Control c = null;
 		try {
@@ -313,7 +329,7 @@ public class Control implements Serializable {
 			for(int i = 0; i < result.size()-1; i++) {
 				boolean swap = false;
 				for(int j = 0; j < result.size()-1; j++){
-					if(result.get(j).getCount() > result.get(j+1).getCount()) {
+					if(result.get(j).getCount() < result.get(j+1).getCount()) {
 						Value temp = result.get(j+1);
 						result.set(j+1, result.get(j));
 						result.set(j, temp);

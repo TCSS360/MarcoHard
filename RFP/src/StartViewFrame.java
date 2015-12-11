@@ -738,37 +738,42 @@ public class StartViewFrame {
 		btnDel.setEnabled(false);
 		btnDel.addActionListener(new ActionListener(){
 			@Override
-			public void actionPerformed(ActionEvent e) {				
-				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete '" + 
-						RFP.getCategory(categoryList.getSelectedIndex()).getClause(titleList.getSelectedIndex()).getTitle()
-						+ "' clause?", "Confirm", JOptionPane.YES_NO_OPTION);
-				if(confirm == JOptionPane.YES_OPTION){
-					if(!goSearch){
+			public void actionPerformed(ActionEvent e) {
+				if(!goSearch){
+					int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete '" + 
+							RFP.getCategory(categoryList.getSelectedIndex()).getClause(titleList.getSelectedIndex()).getTitle()
+							+ "' clause?", "Confirm", JOptionPane.YES_NO_OPTION);
+					if(confirm == JOptionPane.YES_OPTION){
 						RFP.getCategory(categoryList.getSelectedIndex()).delete(titleList.getSelectedIndex());
-						clauseOfCategory();					
-					} else {
-						Value choose = searchResult.get(titleList.getSelectedIndex());
-						for(int i = 0; i < RFP.getCategoryName().length; i++){
-							if(choose.getCategoryName().equals(RFP.getCategoryName()[i])){
+						clauseOfCategory();
+					}
+				} else {
+					Value choose = searchResult.get(titleList.getSelectedIndex());
+					for(int i = 0; i < RFP.getCategoryName().length; i++){
+						if(choose.getCategoryName().equals(RFP.getCategoryName()[i])){
+							int confirm = JOptionPane.showConfirmDialog(null, "Do you want to delete '" + 
+									RFP.getCategory(i).getClause(choose.getClauseID()).getTitle()
+									+ "' clause?", "Confirm", JOptionPane.YES_NO_OPTION);
+							if(confirm == JOptionPane.YES_OPTION)
 								RFP.getCategory(i).delete(choose.getClauseID());
-								break;
-							}
+							break;
 						}
-						hash = RFP.fillHashMap();
-						
-						displaySearchClauseInAdmin();
-						
-						btnModify.setEnabled(false);
-						btnDel.setEnabled(false);
-	//					goSearch = true;
 					}
-					if(titleList.isSelectionEmpty()){
-						btnDel.setEnabled(false);
-						btnModify.setEnabled(false);
-					}
-					infoClauseArea.setText("");;
-					RFP.save(RFP, "default.ser");
+					hash = RFP.fillHashMap();
+					
+					displaySearchClauseInAdmin();
+						
+					btnModify.setEnabled(false);
+					btnDel.setEnabled(false);
+	//				goSearch = true;
 				}
+				if(titleList.isSelectionEmpty()){
+					btnDel.setEnabled(false);
+					btnModify.setEnabled(false);
+				}
+				infoClauseArea.setText("");;
+				RFP.save(RFP, "default.ser");
+				
 			}			
 		});
 		clause_btn.add(btnDel);

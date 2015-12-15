@@ -290,7 +290,14 @@ public class Control implements Serializable {
 				temp.append(st.charAt(i));
 			}
 			if(i == st.length()-1) toReturn.add(temp.toString());
-		}		
+		}
+		
+		for(int i = 0; i < toReturn.size(); i++){
+			if(toReturn.get(i).equals("")){
+				toReturn.remove(i);
+			}
+		}
+		
 		return toReturn;
 	}
 	
@@ -301,7 +308,7 @@ public class Control implements Serializable {
 	 */
 	public ArrayList<Value> search(String st, MyHashMap<String,Value> myHash){		 	
 		ArrayList<String> words = split(st);	//Splitting the string into individual words
-		
+//		System.out.println(words.toString());
 		//Get the clauses which contains the words in the input string		
 		ArrayList<Value> result = new ArrayList<Value>();		
 		for(int i = 0; i < words.size(); i++){

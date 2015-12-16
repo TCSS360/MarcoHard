@@ -26,12 +26,12 @@ public class CategoryTest {
 		clause1 = new Clause("clause 1", "this is the info.");
 		clause3 = new Clause("clause 3");
 	}
-	
+	@Test
     /**
      * Test method for {@link Category#add(Clause)}
      * when the category contains a clause with the same title.
      */
-    @Test(expected = IllegalArgumentException.class)
+    (expected = IllegalArgumentException.class)
     public void exceptionTestAdd() {
     	test.add(clause3);
     	test.add(new Clause("clause 3", "info"));

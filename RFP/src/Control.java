@@ -1,13 +1,10 @@
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This class represents a control to all categories.
@@ -16,14 +13,10 @@ public class Control implements Serializable {
 	
 	/** The serial version UID. */
 	private static final long serialVersionUID = -1865987846022596672L;
-
+	
+	/** Password to login as Admin */
 	private static final String password = "macrohard";
-	
-	/**
-	 * The hash map holds key as words and value as category name and clause ID
-	 */
-//	private MyHashMap<String, Value> myHash;
-	
+		
 	/** All categories */
 	private List<Category> cats;
 	
@@ -32,7 +25,6 @@ public class Control implements Serializable {
 	 */
 	Control() {
 		this.cats = new ArrayList<Category>();
-//		this.myHash = new MyHashMap<String, Value>();
 	}
 	
 	/**
@@ -111,25 +103,6 @@ public class Control implements Serializable {
 		this.cats.remove(index);
 	}
 	
-//	/**
-//	 * Deletes the category that has the given name.
-//	 * 
-//	 * @param name category's name.
-//	 * @exception IllegalArgumentException if the control doesn't contain such category
-//	 */
-//	public void deleteCategory(String name){
-//		int i = -1;
-//		do {
-//			i++;
-//		} while (i <= cats.size() || !cats.get(i).getName().equals(name));
-//	
-//		if (i > cats.size()) {
-//			throw new IllegalArgumentException("Does not contain such category.");
-//		} else {
-//			cats.remove(i);
-//		}
-//	}
-	
 	/**
 	 * Check entered password is match with stored password
 	 * @param input is a entered password
@@ -181,74 +154,12 @@ public class Control implements Serializable {
 			e.printStackTrace();			
 		}
 		return c;
-	}
-	
-	/**
-	 * Loading categories and clauses from the text file. 
-	 * @param name is file's name.
-	 * @throws FileNotFoundException
-	 */
-	public void readFile(String name) throws FileNotFoundException {
-		File file = new File(name);
-		Scanner input = new Scanner(file);
-		ArrayList<Category> temp = new ArrayList<Category>();
-		int index = 0;
-		Boolean catFlag = false;
-		Boolean clFlag = false;
-		Boolean infoFlag = false;
-		StringBuilder st = new StringBuilder();
-		
-		//Loop until the end of file		
-		while(input.hasNextLine()){
-			String line = input.nextLine();
-			if(line.equals("Category:")){
-				catFlag = true;
-				continue;
-			}			
-			//Create new category.
-			if(catFlag){ 
-				temp.add(new Category(line));
-				index = temp.size() - 1;
-				catFlag = false;
-				continue;
-			}			
-			//Create new clause.
-			if(line.equals("Clause:")){
-				clFlag = true;
-				continue;
-			}
-			//Get the clause title then create new clause without clause body.
-			if(clFlag){
-				temp.get(index).add(new Clause(line, "", temp.get(index).size()));
-				clFlag = false;
-				infoFlag = true;
-				continue;
-			}			
-			//Get the clause's information.
-			if(infoFlag && !line.equals("End-Clause:")){
-				st.append(line + "\n");
-			}			
-			//Got all clause information
-			if(line.equals("End-Clause:")){
-				st.deleteCharAt(st.length()-1);	//Remove the last new line
-				temp.get(index).modifyClauseInfo(temp.get(index).size() - 1, st.toString());
-				st = new StringBuilder();
-				infoFlag = false;
-				continue;
-			}
-			//End of current category.
-			if(line.equals("End-Category"))
-				continue;						
-		}
-		this.cats = temp;
-		input.close();
-	}
+	}	
 	
 	/**
 	 * Fill out the hash table with clauses.
 	 * In each category, 
 	 */
-//	public void fillHashMap(){
 	public MyHashMap<String,Value> fillHashMap(){
 		MyHashMap<String,Value> myHash = new MyHashMap<String,Value>();
 		//Go through all the category
@@ -369,42 +280,4 @@ public class Control implements Serializable {
 		
 		return toReturn;
 	}
-	
-//	public static void main(String[] args) throws FileNotFoundException{
-//		Control c = new Control();
-////		Category cat1 = new Category("Category1");
-////		cat1.add(new Clause("title 1", "info 1"));
-////		cat1.add(new Clause("TITLE  1", "INFO   1"));
-////		Category cat2 = new Category("Category22222");
-////		cat2.add(new Clause("TITLE222222", "INFOOOO22222"));
-////		Category cat3 = new Category("Category 3!");
-////		c.addCategory(cat1);
-////		c.addCategory(cat2);
-////		c.addCategory(cat3);		
-//		
-////		try {
-////			ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("default.ser"));
-////			save.writeObject(c);
-////			save.flush();
-////			save.close();
-////		} catch (Exception e) {
-////			e.printStackTrace();
-////		}
-//		
-//		try {
-//			ObjectInputStream load = new ObjectInputStream(new FileInputStream("default.ser"));
-//			c = (Control) load.readObject();
-//			load.close();
-////			System.out.println(restore.toString());
-//		} catch (Exception e) {
-//			e.printStackTrace();			
-//		}
-//		
-//		MyHashMap<String,Value> hash = c.fillHashMap();
-//		
-//		System.out.println(c.search("cost", hash).size());
-//		System.out.println(c.search("cost", hash).toString());
-//		
-////		System.out.println(c.toString());
-//	}
 }

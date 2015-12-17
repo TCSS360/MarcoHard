@@ -16,11 +16,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -520,6 +522,51 @@ public class StartViewFrame {
 		mnFile.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mnFile);
 		
+		JMenuItem backup = new JMenuItem("Back up");
+		backup.setMnemonic('b');
+		backup.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				JFileChooser myFile = new JFileChooser();
+				myFile.setCurrentDirectory(new File("."));				
+
+                final int returnVal = myFile.showSaveDialog(null);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	if(myFile.getSelectedFile().getName().contains(".ser"))
+			    		RFP.save(RFP, myFile.getSelectedFile().getName());
+			    	else
+			    		RFP.save(RFP, myFile.getSelectedFile().getName() + ".ser");			    	
+			    }
+			}
+		});
+		mnFile.add(backup);
+		
+		JMenuItem restore = new JMenuItem("Restore");
+		restore.setMnemonic('r');
+		restore.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				JFileChooser myFile = new JFileChooser();
+				myFile.setCurrentDirectory(new File("."));
+				
+			    int returnVal = myFile.showOpenDialog(null);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {	
+			    	if(myFile.getSelectedFile().getName().contains(".ser")){
+				    	RFP = RFP.load(myFile.getSelectedFile().getName());
+				        RFP.save(RFP, "default.ser");
+				        adminFrame.dispose();
+				        AdminGUI();
+			    	} else {
+			    		JOptionPane.showMessageDialog(null, "You chose the wrong file!"
+			    				+ "\nPlease choose the file with extension .ser", "Error", JOptionPane.ERROR_MESSAGE);
+			    	}
+			    }
+			}
+		});
+		mnFile.add(restore);
+		
+		mnFile.addSeparator();
+		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic('x');
 		mntmExit.addActionListener(new ActionListener(){
@@ -549,34 +596,6 @@ public class StartViewFrame {
 						+ "To Modify a Clause:\n Choose a clause which you want to modify => click on [Modify Clause] button\n"
 						+ "=> Make the proper changes to that certain clause => click the [Save] button.\n"
 						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button.");
-//				JOptionPane.showMessageDialog(adminFrame, "To Exit the application (Left Click on [File] -> [Exit]) or \n"
-//						+ "(Left Click on the [Exit] button found at the bottom right corner of the window).\n"
-//						+ "To View Clauses (Left Click on your prefered category on the list of categories provided).\n"
-//						+ "To Search (Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
-//						+ "The [Search] button can be found at the top right corner of the window.\n"
-//						+ "To Log Out (Left Click on the [Log Out] button found at the bottom right corner of the window).\n"
-//						+ "To learn more about how to use the application, please left click on the [Help] button found at the top left corner of the window;\n"
-//						+ "you would then left click on the [Receive Help] button under the [Help] button).\n"
-//						+ "To create a category (Left Click on the [Create Category] button found at the bottom left corner of the window; \n"
-//						+ "you would then enter the name of the category and left click on the [Create] button).\n"
-//						+ "To rename a category (Left Click on any of the existing categories found on the list of categories;\n "
-//						+ "you would then left click on the [Rename Category] button found at the bottom left corner of the window.\n"
-//						+ "After that, enter the new name of the category and left click on the [Rename] button).\n"
-//						+ "To remove a category (Left Click on any of the existing categories found on the list of categories;\n"
-//						+ "you would then left click on the [Remove Category] button found at the bottom left corner of the window.\n"
-//						+ "After that, left click on the [Yes] button).\n"
-//						+ "To add a clause (left click on the [Add Clause] button found at the bottom of the window;\n"
-//						+ "you would then choose the category in which you want to add a clause in.\n"
-//						+ "Make a title for the clause and enter in the proper information.\n"
-//						+ "After that, left click the [Save] button).\n"
-//						+ "To modify a clause (choose the category in which you want to modify a clause in;\n"
-//						+ "you would then left click on the [Modify Clause] button found at the bottom of the window.\n"
-//						+ "Make the proper changes to that certain clause.\n"
-//						+ "After that, left click the [Save] button).\n"
-//						+ "To delete a clause (choose the category in which you want to delete a clause in;\n"
-//						+ "you would then left click on the [Delete Clause] button found at the bottom of the window\n"
-//						+ "after choosing the clause you wish to delete/remove from that category.\n"
-//						+ "Thank You for choosing Macrohard, WE LOVE YOU!\n");
 			}
 		});
 		mnHelp.add(receive_help);
@@ -618,7 +637,7 @@ public class StartViewFrame {
 		btnNew.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				newCategory();
+				newCategory("Create Category");
 			}			
 		});
 		cate_btn.add(btnNew);
@@ -628,7 +647,7 @@ public class StartViewFrame {
 		btnRename.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!categoryList.isSelectionEmpty()){
-					renameCategory();
+					newCategory("Rename Category");
 				} else { 
 					JOptionPane.showMessageDialog(adminFrame, "Please choose the category !",
 							"CAUTION", JOptionPane.INFORMATION_MESSAGE);
@@ -925,6 +944,7 @@ public class StartViewFrame {
 		    		  
 		    		  btnModify.setEnabled(false);
 		    		  btnDel.setEnabled(false);
+		    		  infoClauseArea.setText("");
 		    		  searchField.setText("");
 		    		  goSearch = false;
 		    	  }
@@ -941,7 +961,9 @@ public class StartViewFrame {
 					  
 					  btnModify.setEnabled(false);
 					  btnDel.setEnabled(false);
-					  goSearch = false;
+					  infoClauseArea.setText("");
+		    		  searchField.setText("");
+		    		  goSearch = false;
 				  }
 			  }
 		});
@@ -955,7 +977,9 @@ public class StartViewFrame {
 					  
 					  btnModify.setEnabled(false);
 					  btnDel.setEnabled(false);
-					  goSearch = false;
+					  infoClauseArea.setText("");
+		    		  searchField.setText("");
+		    		  goSearch = false;
 				  }
 			  }
 		});
@@ -967,9 +991,9 @@ public class StartViewFrame {
 	/**
 	 * An add new Category window.
 	 */
-	private void newCategory() {
+	private void newCategory(String name) {
 		JFrame Cate_frame = new JFrame();
-		Cate_frame.setTitle("Create Category");
+		Cate_frame.setTitle(name);
 		Cate_frame.setBounds(100, 100, 450, 175);
 		Cate_frame.setResizable(false);
 		Cate_frame.setLocationRelativeTo(null);
@@ -985,26 +1009,74 @@ public class StartViewFrame {
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField.setColumns(10);
-		textField.setBounds(151, 40, 260, 25);
+		textField.setBounds(151, 40, 260, 25);		
 		Cate_frame.getContentPane().add(textField);
 		
-		JButton create = new JButton("Create");
-		create.setBounds(121, 90, 80, 25);
+		JButton create = new JButton();;
+		if(name.equals("Create Category"))
+			create.setText("Create");
+		if(name.equals("Rename Category")){
+			create.setText("Rename");
+			textField.setText(cate.getName());
+		}	
+		create.setBounds(110, 90, 90, 25);
 		create.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!textField.getText().equals("")){
-					RFP.addCategory(new Category(textField.getText()));
-					categoryPanel.removeAll();
-					
-					displayCategoryList();				
-					
-					adminFrame.repaint();
-					adminFrame.setVisible(true);
-					Cate_frame.dispose();
-				} else {
-					JOptionPane.showMessageDialog(adminFrame, "Please enter the name of category !",
-							"Text field is empty", JOptionPane.INFORMATION_MESSAGE);
+				//Creating new category
+				if(name.equals("Create Category")){
+					if(!textField.getText().equals("")&& textField.getText().charAt(0) != ' '){
+						if(!nameDuplicate(textField.getText())){
+							RFP.addCategory(new Category(textField.getText()));
+							categoryPanel.removeAll();
+						
+							displayCategoryList();				
+						
+							adminFrame.repaint();
+							adminFrame.setVisible(true);
+							Cate_frame.dispose();
+						} else {
+							JOptionPane.showMessageDialog(adminFrame, "Name of category is already taken.",
+									"Duplicated category name", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						if(textField.getText().equals(""))
+							JOptionPane.showMessageDialog(adminFrame, "Name of category can not be empty!",
+								"Error", JOptionPane.WARNING_MESSAGE);
+						if(textField.getText().charAt(0) == ' ')
+							JOptionPane.showMessageDialog(adminFrame, "Name of category can not start with 'Space'!",
+									"Error", JOptionPane.WARNING_MESSAGE);
+						
+					}					
+				}
+				//Rename category
+				if(name.equals("Rename Category")){
+					if(!textField.getText().equals("") && textField.getText().charAt(0) != 32){
+						String name = textField.getText();
+						//get the current index
+						if(!nameDuplicate(name)){
+							int index = categoryList.getSelectedIndex();
+							RFP.getCategory(categoryList.getSelectedIndex()).setName(name);				
+							categoryPanel.removeAll();
+							
+							displayCategoryList();				
+							categoryList.setSelectedIndex(index); //restore the previous index
+							
+							adminFrame.repaint();
+							adminFrame.setVisible(true);
+							Cate_frame.dispose();
+						} else {
+							JOptionPane.showMessageDialog(adminFrame, "Name of category is already taken.",
+									"Duplicated category name", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						if(textField.getText().equals(""))
+							JOptionPane.showMessageDialog(adminFrame, "Name of category can not be empty!",
+								"Error", JOptionPane.WARNING_MESSAGE);
+						if(textField.getText().charAt(0) == ' ')
+							JOptionPane.showMessageDialog(adminFrame, "Name of category can not start with 'Space'!",
+									"Error", JOptionPane.WARNING_MESSAGE);
+					}
 				}
 				RFP.save(RFP, "default.ser");
 			}
@@ -1013,7 +1085,7 @@ public class StartViewFrame {
 		Cate_frame.getContentPane().add(create);
 		
 		JButton cancel = new JButton("Cancel");
-		cancel.setBounds(240, 90, 80, 25);
+		cancel.setBounds(255, 90, 80, 25);
 		cancel.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -1022,73 +1094,25 @@ public class StartViewFrame {
 		});
 		Cate_frame.getContentPane().add(cancel);
 		Cate_frame.setVisible(true);
-	}
-
+	}	
+	
 	/**
-	 * Rename Category Window
+	 * Checking a duplicated category name.
+	 * @param name is a new category name.
+	 * @return true if a category name is already existed in the category list / false otherwise 
 	 */
-	private void renameCategory() {
-		JFrame Cate_frame = new JFrame();
-		Cate_frame.setTitle("Rename Category");
-		Cate_frame.setBounds(100, 100, 450, 175);
-		Cate_frame.setResizable(false);
-		Cate_frame.setLocationRelativeTo(null);
-		Cate_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		Cate_frame.getContentPane().setLayout(null);
-		
-		JLabel label = new JLabel("Category Name");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		label.setBounds(30, 40, 130, 25);
-		Cate_frame.getContentPane().add(label);
-		
-		JTextField textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(151, 40, 260, 25);
-		textField.setText(cate.getName());
-		Cate_frame.getContentPane().add(textField);
-		
-		JButton create = new JButton("Rename");
-		create.setBounds(110, 90, 90, 25);
-		create.addActionListener(new ActionListener(){			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(!textField.getText().equals("")){
-					String name = textField.getText();
-					//get the current index
-					int index = categoryList.getSelectedIndex();
-					RFP.getCategory(categoryList.getSelectedIndex()).setName(name);				
-					categoryPanel.removeAll();
-					
-					displayCategoryList();				
-					categoryList.setSelectedIndex(index); //restore the previous index
-					
-					adminFrame.repaint();
-					adminFrame.setVisible(true);
-					Cate_frame.dispose();
-					RFP.save(RFP, "default.ser");
-				} else {
-				JOptionPane.showMessageDialog(adminFrame, "Please enter the name of category !",
-						"Text field is empty", JOptionPane.INFORMATION_MESSAGE);
-				}
+	private boolean nameDuplicate(String name){
+		boolean result = false;
+		String[] cat = RFP.getCategoryName();
+		for(int i = 0; i < cat.length; i++){
+			if(cat[i].equalsIgnoreCase(name)){
+				result = true;
+				break;
 			}
-			
-		});
-		Cate_frame.getContentPane().add(create);
-		
-		JButton cancel = new JButton("Cancel");
-		cancel.setBounds(250, 90, 80, 25);
-		cancel.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				Cate_frame.dispose();
-			}
-		});
-		Cate_frame.getContentPane().add(cancel);
-		Cate_frame.setVisible(true);
+		}
+		return result;
 	}
-
+	
 	/**
 	 * 	Create a list of clause's title when click on each categoy	
 	 */

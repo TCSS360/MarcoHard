@@ -95,23 +95,23 @@ public class Category implements Serializable {
 		this.clauses.set(index, cl);
 	}
 	
-	/**
-	 * Modify the title of clause in the category.
-	 * @param index the clause which want to modify.
-	 * @param title a new title of clause.
-	 */
-	public void modifyClauseTitle(int index, String title){
-		this.clauses.get(index).setTitle(title);
-	}
-	
-	/**
-	 * Modify the information of clause in the category.
-	 * @param index is the clause which want to modify.
-	 * @param infor is a new information of clause.
-	 */
-	public void modifyClauseInfo(int index, String infor){
-		this.clauses.get(index).setInfo(infor);
-	}
+//	/**
+//	 * Modify the title of clause in the category.
+//	 * @param index the clause which want to modify.
+//	 * @param title a new title of clause.
+//	 */
+//	public void modifyClauseTitle(int index, String title){
+//		this.clauses.get(index).setTitle(title);
+//	}
+//	
+//	/**
+//	 * Modify the information of clause in the category.
+//	 * @param index is the clause which want to modify.
+//	 * @param infor is a new information of clause.
+//	 */
+//	public void modifyClauseInfo(int index, String infor){
+//		this.clauses.get(index).setInfo(infor);
+//	}
 	
 	/**
 	 * Get the clause at the index i

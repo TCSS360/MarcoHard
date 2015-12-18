@@ -609,7 +609,7 @@ public class StartViewFrame {
 						+ "=> Enter the 'Clause Information' => click the [Save] button.\n"
 						+ "To Modify a Clause:\n Choose a clause which you want to modify => click on [Modify Clause] button\n"
 						+ "=> Make the proper changes to that certain clause => click the [Save] button.\n"
-						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button."
+						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button.\n"
 						+ "To Back up your data:\n => Choose [File] menu => [Back Up];\n"						
 						+ "=> Finding and choosing the folder where you wish to save your data in.\n"
 						+ "=> Enter the file name => click [Save]\n"

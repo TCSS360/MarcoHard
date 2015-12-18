@@ -596,12 +596,12 @@ public class StartViewFrame {
 						+ "To Modify a Clause:\n Choose a clause which you want to modify => click on [Modify Clause] button\n"
 						+ "=> Make the proper changes to that certain clause => click the [Save] button.\n"
 						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button.\n"
-						+ "To back up your data => (click on [File] => [Back Up];\n"
+						+ "To back up your data:\n => (click on [File] => [Back Up];\n"
 						+ "you would then click [Save] after \n"
-						+ "finding and choosing the folder where you wish your data to be saved).\n"
-						+ "To restore your data => (click on [File] => [Restore];\n"
+						+ "finding and choosing the folder where you wish to save your data in).\n"
+						+ "To restore your data: \n => (click on [File] => [Restore];\n"
 						+ "you would then click [Open] after\n"
-						+ "finding and choosing the folder where your data is saved).\n");
+						+ "finding and choosing the folder that contains your backed up data).\n");
 			}
 		});
 		mnHelp.add(receive_help);

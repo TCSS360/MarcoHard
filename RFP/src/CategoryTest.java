@@ -3,13 +3,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * 
- */
 
 /**
- * @author Ken
- *
+ * @author Ken Chan
  */
 public class CategoryTest {
 	
@@ -26,16 +22,24 @@ public class CategoryTest {
 		clause1 = new Clause("clause 1", "this is the info.");
 		clause3 = new Clause("clause 3");
 	}
+	
 	@Test
     /**
      * Test method for {@link Category#add(Clause)}
      * when the category contains a clause with the same title.
      */
-    (expected = IllegalArgumentException.class)
-    public void exceptionTestAdd() {
+//    (expected = IllegalArgumentException.class)
+//    public void exceptionTestAdd() {
+	public void testAdd(){
     	test.add(clause3);
     	test.add(new Clause("clause 3", "info"));
+    	
     }
+	
+	@Test
+	public void testExistClauseTitle() {
+		test.existClauseTitle("clause 3");
+	}
 	
     /**
      * Test method for {@link Category#delete(Clause)}
@@ -55,6 +59,18 @@ public class CategoryTest {
     	test.add(new Clause("clause 1"));
     	test.delete(clause1);
     }
+    
+    @Test
+	public void testModifyInformation() {
+    	test.add(new Clause("clause 1"));    	
+		test.modifyInformation(0, new Clause("clause 2"));
+	}
+    
+    @Test
+	public void testGetClause() {
+    	test.add(new Clause("clause 1"));
+		test.getClause(0);
+	}
     
 	/**
 	 * Test method for {@link Category#size()}.
@@ -91,18 +107,12 @@ public class CategoryTest {
 		test.add(clause3);
 		System.out.println(test.toString());
 		StringBuilder sb = new StringBuilder();
-		sb.append("Category: Category 1 (2 clauses)\n");
-		sb.append("================================\n");
 		sb.append("clause 1\n");
 		sb.append("--------\n");
 		sb.append("this is the info.\n\n");
 		sb.append("clause 3\n");
 		sb.append("--------\n");
-		sb.append("<EMPTY>\n");
-		sb.append("================================");		
+		sb.append("<EMPTY>\n");		
 		assertEquals(sb.toString(), test.toString());
-		Category cat1 = new Category("Cat1");
-		System.out.println(cat1.toString());
-		assertEquals("Category: Cat1 (0 clause)\n=========================\n=========================", cat1.toString());
 	}
 }

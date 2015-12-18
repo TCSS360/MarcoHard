@@ -43,6 +43,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+/** 
+ * @author Navy Nguyen 
+ * @co-author Shelema Bekele designed WelcomeGUI, userGUI functions
+ * @co-author Abdalla Ahmed, designed buttons such as exit, log out, and help menu
+ * @co-author Mubarek Shafi designed passwords inteface
+ * 
+ * This class contains all element of GUI
+ */
 public class StartViewFrame {
 	
 	private JFrame userFrame;
@@ -122,6 +130,8 @@ public class StartViewFrame {
 	
 	/**
 	 * Welcome frame
+	 * 
+	 * @author Shelema Bekele
 	 */
 	private void WelcomeGUI() {
 		welcomeFrame = new JFrame("Language Library");
@@ -197,10 +207,12 @@ public class StartViewFrame {
 		welcomeFrame.setVisible(true);
 	}
 	
-	/**
+	/**	 
 	 * The general user interface.
 	 * This interface has the list of category and place to display the clauses in chosen category.
 	 * User also can search the clause by keywords.
+	 * 
+	 * @author Shelema Bekele, Abdalla Ahmed
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void UserGUI(){
@@ -248,12 +260,6 @@ public class StartViewFrame {
 						+ "To View Clauses:\nChoose category on the list of categories provided.\n"
 						+ "To Search:\nType in a keywords of what you are looking for, then click [Search] button.\n"
 						+ "To Log Out:\nClick on [Log Out] button at the bottom right corner of the window.\n", "Help", JOptionPane.INFORMATION_MESSAGE);
-//				JOptionPane.showMessageDialog(userFrame, "To Exit: \nLeft Click on [File] -> [Exit]) or (Left Click on the [Exit] button found at the bottom right corner of the window).\n"
-//						+ "To View Clauses \n(Left Click on your prefered category on the list of categories provided).\n"
-//						+ "To Search \n(Type in a key/character of what you are looking for, then left click on the [Search] button).\n"
-//						+ "The [Search] button can be found at the top right corner of the window.\n"
-//						+ "To Log Out \n(Left Click on the [Log Out] button found at the bottom right corner of the window).\n");
-//						+ "To learn more about the application, please left click on the [About ...] button found at the top left corner of the window).\n");
 			}
 		});
 		mnAbout.add(about_the_user);
@@ -363,6 +369,9 @@ public class StartViewFrame {
 		userFrame.setVisible(true);
 	}
 	
+	/**
+	 * Display the clauses of category into text area.
+	 */
 	private void displayClauseOfCategory(){
 //		Category cate = RFP.getCategory(categoryList.getSelectedIndex());
 		userClauseArea.setText("");
@@ -371,6 +380,9 @@ public class StartViewFrame {
 		searchField.setText("");
 	}
 	
+	/**
+	 * This function gets the keywords and search for the clauses which match.
+	 */
 	private void userSearchAction(){
 		if(!searchField.getText().equals("")){
 			ArrayList<Clause> search_clause = RFP.getClauseFromSearch(RFP.search(searchField.getText(), hash));
@@ -391,6 +403,8 @@ public class StartViewFrame {
 	}
 	
 	/**
+	 * @author Mubarek Shafi
+	 * 
 	 * The password is required to login as Admin.
 	 */
 	private void passwordGUI(){
@@ -595,13 +609,13 @@ public class StartViewFrame {
 						+ "=> Enter the 'Clause Information' => click the [Save] button.\n"
 						+ "To Modify a Clause:\n Choose a clause which you want to modify => click on [Modify Clause] button\n"
 						+ "=> Make the proper changes to that certain clause => click the [Save] button.\n"
-						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button.\n"
-						+ "To back up your data:\n => (click on [File] => [Back Up];\n"
-						+ "you would then click [Save] after \n"
-						+ "finding and choosing the folder where you wish to save your data in).\n"
-						+ "To restore your data: \n => (click on [File] => [Restore];\n"
-						+ "you would then click [Open] after\n"
-						+ "finding and choosing the folder that contains your backed up data).\n");
+						+ "To Delete a Clause:\n Choose the clause which you want to delete => click on [Delete Clause] button."
+						+ "To Back up your data:\n => Choose [File] menu => [Back Up];\n"						
+						+ "=> Finding and choosing the folder where you wish to save your data in.\n"
+						+ "=> Enter the file name => click [Save]\n"
+						+ "To Restore your data: \n => click on [File] menu => [Restore];\n"
+						+ "=> Finding and choosing the folder that contains your backed up data\n"
+						+ "=> Choose a restoring file => Click [Open]\n");
 			}
 		});
 		mnHelp.add(receive_help);
@@ -689,6 +703,7 @@ public class StartViewFrame {
 				adminFrame.repaint();
 				adminFrame.setVisible(true);
 				RFP.save(RFP, "default.ser");
+				hash = RFP.fillHashMap();
 			}
 		});
 		cate_btn.add(btnRemoveCategory);
@@ -783,8 +798,7 @@ public class StartViewFrame {
 								RFP.getCategory(i).delete(choose.getClauseID());
 							break;
 						}
-					}
-					hash = RFP.fillHashMap();
+					}					
 					
 					displaySearchClauseInAdmin();
 						
@@ -798,6 +812,7 @@ public class StartViewFrame {
 				}
 				infoClauseArea.setText("");;
 				RFP.save(RFP, "default.ser");
+				hash = RFP.fillHashMap();
 				
 			}			
 		});
@@ -1319,6 +1334,8 @@ public class StartViewFrame {
 									}
 								}								
 							}
+							clauseOfCategory();
+							titleList.setSelectedIndex(index);
 							addClause.dispose();
 						}						
 					} else {

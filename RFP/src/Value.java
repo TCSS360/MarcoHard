@@ -1,4 +1,6 @@
 /**
+ * @author Abdalla Ahmed
+ * 
  * This class is stored the category name and its clause id.
  * we use this class to retrieve the an array and use this array
  * to pull out the clauses which contain the words that we are searching.

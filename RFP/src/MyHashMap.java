@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 
 /**
+ * @author Navy Nguyen
+ * @co-author Abdalla Ahmed disigned private Node class
+ * 
  * This class is used to category and its clauses as value.
  *
- * @param <K>
- * @param <V>
+ * @param <K> is the key object
+ * @param <V> is the value object
  */
 public class MyHashMap <K, V>{
 	/**
@@ -98,6 +101,8 @@ public class MyHashMap <K, V>{
 	}
 	
 	/**
+	 * @author Abdalla Ahmed
+	 * 
 	 * The node class is stored the key and value.
 	 * @param <K> is the String for searching.
 	 * @param <V> is the value object which contains category name and its clauses.

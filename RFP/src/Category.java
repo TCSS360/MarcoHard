@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Ken Chan
+ * 
  * This class represents a category that contains clauses.
  */
 public class Category implements Serializable {
@@ -50,6 +52,7 @@ public class Category implements Serializable {
 		}
 		return toReturn;
 	}
+	
 	/**
 	 * Removing the clause from the category by using its ID.
 	 * @param index
@@ -60,7 +63,7 @@ public class Category implements Serializable {
 		if(index != 0) 
 			index--;
 		
-		for(int i = index; i < this.clauses.size(); i++){
+		for(int i = 0; i < this.clauses.size(); i++){
 			this.clauses.get(i).setID(i);
 		}
 	}

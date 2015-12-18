@@ -1,7 +1,9 @@
 import java.io.Serializable;
 
 /**
- * This class represents a clause.
+ * @author Mubarek Shafi
+ * 
+ * This class represents a clause. 
  */
 public class Clause implements Serializable {
 

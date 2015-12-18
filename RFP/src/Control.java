@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Navy Nguyen
+ * @co-author Ken Chan designed save and load functions
+ * 
  * This class represents a control to all categories.
  */
 public class Control implements Serializable {
@@ -124,6 +127,8 @@ public class Control implements Serializable {
 	}
 	
 	/**
+	 * @author Ken Chan
+	 * 
 	 * Save the data into file .ser
 	 * @param c is the Control object
 	 * @param fileName is the name of file
@@ -140,6 +145,8 @@ public class Control implements Serializable {
 	}
 	
 	/**
+	 * @author Ken Chan
+	 * 
 	 * Loading the data into object
 	 * @param fileName is the name of file which you want to load data.
 	 * @return the object with all data.

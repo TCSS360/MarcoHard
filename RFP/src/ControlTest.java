@@ -1,14 +1,17 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * @author Ian Henderson
+ */
 @SuppressWarnings("serial")
 public class ControlTest extends Control {
-	/**
-	 * 
-	 */
+	
 	Control controltest;
 
 	@Before
@@ -64,6 +67,40 @@ public class ControlTest extends Control {
 		assertTrue(!controltest.getClass().isArray());
 	}
 
+	@Test
+	public void testPasswordMatch() {
+		char[] input = {'m','a','c','r','o','h','a','r','d'};
+		assertTrue(controltest.passwordMatch(input));
+	}
 
+	@Test
+	public void testSave() {
+		controltest.save(controltest, "test");
+	}
+
+	@Test
+	public void testLoad() {
+		controltest.load("test");
+	}
+	
+	@Test
+	public void testFillHashMap() {
+		MyHashMap<String, Value> myHash = controltest.fillHashMap();
+		assertEquals(0,controltest.search("clause", myHash).size());
+	}
+
+	@Test
+	public void testSearch() {
+		MyHashMap<String, Value> myHash = new MyHashMap<String, Value>();
+		assertEquals(0,controltest.search("clause", myHash).size());
+	}
+
+	@Test
+	public void testGetClauseFromSearch() {
+		MyHashMap<String, Value> myHash = new MyHashMap<String, Value>();
+		ArrayList<Value> result = controltest.search("clause", myHash);
+		ArrayList<Clause> test = controltest.getClauseFromSearch(result);
+		assertEquals(0, test.size());
+	}
 
 }
